@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axentrix | Soluciones Tecnológicas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #0F172A;
+    color: #E5E7EB;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.btn {
+    padding: 12px 20px;
+    background: #2563EB;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn.secondary {
+    background: transparent;
+    border: 1px solid #2563EB;
+}
+
+/* HERO */
+.hero {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #94A3B8;
+}
+
+/* SERVICES */
+.services {
+    padding: 80px 0;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #1E293B;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* VALUE */
+.value {
+    padding: 80px 0;
+    text-align: center;
+}
+
+/* PROCESS */
+.process {
+    padding: 80px 0;
+}
+
+.steps {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.step {
+    flex: 1;
+    background: #1E293B;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* CTA */
+.cta {
+    padding: 80px 0;
+    text-align: center;
+}
+
+footer {
+    padding: 40px 0;
+    text-align: center;
+    background: #020617;
+    color: #64748B;
+}
+
+/* WhatsApp */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    
+<nav>
+    <div class="logo">AXENTRIX</div>
+    <a href="#" class="btn">Contacto</a>
+</nav>
+
+<section class="hero">
+    <h1>Tecnología que impulsa tu operación</h1>
+    <p>Gestionamos, protegemos y optimizamos tu infraestructura tecnológica.</p>
+    <a href="#" class="btn">Solicitar diagnóstico</a>
+    <a href="#" class="btn secondary">WhatsApp</a>
+</section>
+
+<section class="services">
+    <h2>Servicios</h2>
+    <div class="grid">
+        <div class="card">Administración de infraestructura IT</div>
+        <div class="card">Soporte técnico empresarial</div>
+        <div class="card">CCTV y seguridad electrónica</div>
+        <div class="card">Control de acceso biométrico</div>
+        <div class="card">Migración a correo corporativo</div>
+        <div class="card">Mantenimiento de computadores</div>
+    </div>
+</section>
+
+<section class="value">
+    <h2>¿Por qué elegirnos?</h2>
+    <p>Nos encargamos de toda tu tecnología para que tú te enfoques en tu negocio.</p>
+    <br>
+    <p>✔ Respuesta rápida | ✔ Soluciones integrales | ✔ Experiencia real | ✔ Soporte confiable</p>
+</section>
+
+<section class="process">
+    <h2>Cómo trabajamos</h2>
+    <div class="steps">
+        <div class="step">Diagnóstico</div>
+        <div class="step">Implementación</div>
+        <div class="step">Soporte continuo</div>
+    </div>
+</section>
+
+<section class="cta">
+    <h2>¿Necesitas ayuda con tu tecnología?</h2>
+    <br>
+    <a href="#" class="btn">Contáctanos</a>
+</section>
+
+</div>
+
+<footer>
+    <p>AXENTRIX by Masters Technologies</p>
+    <p>Colombia</p>
+</footer>
+
+<a href="https://wa.me/573239646992" class="whatsapp">💬</a>
+
+</body>
+</html>
