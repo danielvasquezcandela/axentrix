@@ -8,18 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
 }
 
 body {
-    background: #0F172A;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #020617, #0F172A);
     color: #E5E7EB;
+    overflow-x: hidden;
 }
 
+/* CONTAINER */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -31,37 +34,68 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
+    animation: fadeDown 0.8s ease;
 }
 
 .logo {
     font-weight: 700;
     font-size: 22px;
+    letter-spacing: 1px;
 }
 
+/* BUTTONS */
 .btn {
-    padding: 12px 20px;
-    background: #2563EB;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 10px;
     text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.btn.secondary {
-    background: transparent;
-    border: 1px solid #2563EB;
+/* PRIMARY BUTTON */
+.btn {
+    background: linear-gradient(135deg, #2563EB, #06B6D4);
+    color: white;
+    box-shadow: 0 0 15px rgba(37,99,235,0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 25px rgba(6,182,212,0.6);
+}
+
+/* BUTTON RIPPLE EFFECT */
+.btn::after {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    background: rgba(255,255,255,0.1);
+    top: 100%;
+    left: -100%;
+    transition: 0.5s;
+}
+
+.btn:hover::after {
+    top: -50%;
+    left: -50%;
 }
 
 /* HERO */
 .hero {
-    padding: 100px 0;
+    padding: 120px 0;
     text-align: center;
+    animation: fadeUp 1s ease;
 }
 
 .hero h1 {
-    font-size: 42px;
+    font-size: 48px;
     margin-bottom: 20px;
+    background: linear-gradient(90deg, #fff, #06B6D4);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .hero p {
@@ -77,19 +111,30 @@ nav {
 
 .services h2 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
+/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
 
+/* CARD */
 .card {
-    background: #1E293B;
-    padding: 20px;
-    border-radius: 12px;
+    background: rgba(30,41,59,0.6);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.4s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(6,182,212,0.4);
+    box-shadow: 0 0 20px rgba(6,182,212,0.2);
 }
 
 /* VALUE */
@@ -111,17 +156,28 @@ nav {
 
 .step {
     flex: 1;
-    background: #1E293B;
-    padding: 20px;
-    border-radius: 12px;
+    background: rgba(30,41,59,0.6);
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.step:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(37,99,235,0.3);
 }
 
 /* CTA */
 .cta {
-    padding: 80px 0;
+    padding: 100px 0;
     text-align: center;
 }
 
+.cta h2 {
+    margin-bottom: 20px;
+}
+
+/* FOOTER */
 footer {
     padding: 40px 0;
     text-align: center;
@@ -129,17 +185,58 @@ footer {
     color: #64748B;
 }
 
-/* WhatsApp */
+/* WHATSAPP */
 .whatsapp {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 25px;
+    right: 25px;
     background: #25D366;
-    padding: 15px;
+    padding: 16px;
     border-radius: 50%;
-    color: white;
-    text-decoration: none;
     font-size: 20px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 0 15px rgba(37,211,102,0.6);
+    transition: 0.3s;
+}
+
+.whatsapp:hover {
+    transform: scale(1.15);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* SCROLL EFFECT (opcional JS luego) */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 </style>
 </head>
