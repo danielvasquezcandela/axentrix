@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 /* RESET */
 * {
     margin: 0;
@@ -15,11 +16,23 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(180deg, #020617, #0F172A);
     color: #E5E7EB;
     overflow-x: hidden;
+}
+
+/* PARTICLES */
+#bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 /* CONTAINER */
@@ -34,16 +47,14 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
-    animation: fadeDown 0.8s ease;
 }
 
 .logo {
     font-weight: 700;
     font-size: 22px;
-    letter-spacing: 1px;
 }
 
-/* BUTTONS */
+/* BUTTON */
 .btn {
     padding: 12px 24px;
     border-radius: 10px;
@@ -51,56 +62,45 @@ nav {
     font-weight: 600;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-/* PRIMARY BUTTON */
-.btn {
     background: linear-gradient(135deg, #2563EB, #06B6D4);
     color: white;
-    box-shadow: 0 0 15px rgba(37,99,235,0.4);
+    transition: 0.3s;
 }
 
 .btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 0 25px rgba(6,182,212,0.6);
+    transform: translateY(-3px);
 }
 
-/* BUTTON RIPPLE EFFECT */
-.btn::after {
+.btn::before {
     content: "";
     position: absolute;
-    width: 300%;
-    height: 300%;
-    background: rgba(255,255,255,0.1);
-    top: 100%;
+    top: 0;
     left: -100%;
-    transition: 0.5s;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.6s;
 }
 
-.btn:hover::after {
-    top: -50%;
-    left: -50%;
+.btn:hover::before {
+    left: 100%;
 }
 
 /* HERO */
 .hero {
     padding: 120px 0;
     text-align: center;
-    animation: fadeUp 1s ease;
 }
 
 .hero h1 {
     font-size: 48px;
-    margin-bottom: 20px;
     background: linear-gradient(90deg, #fff, #06B6D4);
     -webkit-background-clip: text;
     color: transparent;
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
+    margin: 20px 0;
     color: #94A3B8;
 }
 
@@ -109,80 +109,71 @@ nav {
     padding: 80px 0;
 }
 
-.services h2 {
+h2 {
     text-align: center;
-    margin-bottom: 50px;
 }
 
-/* GRID */
+h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #06B6D4;
+    margin: 10px auto 0;
+}
+
 .grid {
     display: grid;
+    gap: 20px;
+    margin-top: 40px;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
 }
 
-/* CARD */
 .card {
-    background: rgba(30,41,59,0.6);
-    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
     transition: 0.4s;
-    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(6,182,212,0.4);
-    box-shadow: 0 0 20px rgba(6,182,212,0.2);
+    transform: translateY(-10px);
+    border-color: rgba(6,182,212,0.6);
+    box-shadow: 0 0 30px rgba(6,182,212,0.3);
 }
 
-/* VALUE */
-.value {
+/* SECTIONS */
+.value, .process, .cta {
     padding: 80px 0;
     text-align: center;
-}
-
-/* PROCESS */
-.process {
-    padding: 80px 0;
 }
 
 .steps {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .step {
     flex: 1;
-    background: rgba(30,41,59,0.6);
+    background: rgba(255,255,255,0.03);
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 16px;
     transition: 0.3s;
 }
 
 .step:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(37,99,235,0.3);
-}
-
-/* CTA */
-.cta {
-    padding: 100px 0;
-    text-align: center;
-}
-
-.cta h2 {
-    margin-bottom: 20px;
 }
 
 /* FOOTER */
 footer {
-    padding: 40px 0;
+    padding: 40px;
     text-align: center;
     background: #020617;
-    color: #64748B;
 }
 
 /* WHATSAPP */
@@ -191,43 +182,13 @@ footer {
     bottom: 25px;
     right: 25px;
     background: #25D366;
-    padding: 16px;
+    padding: 15px;
     border-radius: 50%;
-    font-size: 20px;
-    text-decoration: none;
     color: white;
-    box-shadow: 0 0 15px rgba(37,211,102,0.6);
-    transition: 0.3s;
+    text-decoration: none;
 }
 
-.whatsapp:hover {
-    transform: scale(1.15);
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* SCROLL EFFECT (opcional JS luego) */
+/* SCROLL ANIMATION */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -238,45 +199,45 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+
 </style>
 </head>
 
 <body>
 
+<canvas id="bgCanvas"></canvas>
+
 <div class="container">
-    
+
 <nav>
     <div class="logo">AXENTRIX</div>
-    <a href="#" class="btn">Contacto</a>
+    <a href="mailto:daniel.vasquez@axentrix.co" class="btn">Contacto</a>
 </nav>
 
-<section class="hero">
+<section class="hero reveal">
     <h1>Tecnología que impulsa tu operación</h1>
     <p>Gestionamos, protegemos y optimizamos tu infraestructura tecnológica.</p>
-    <a href="mailto:daniel.vasquez@axentrix.co" class="btn">Solicitar diagnóstico</a>
-    <a href="https://wa.me/573239646992" class="btn secondary">WhatsApp</a>
+    <a href="https://wa.me/573239646992" class="btn">Solicitar diagnóstico</a>
 </section>
 
-<section class="services">
+<section class="services reveal">
     <h2>Servicios</h2>
     <div class="grid">
-        <div class="card">Administración de infraestructura IT</div>
-        <div class="card">Soporte técnico empresarial</div>
-        <div class="card">CCTV y seguridad electrónica</div>
-        <div class="card">Control de acceso biométrico</div>
-        <div class="card">Migración a correo corporativo</div>
-        <div class="card">Mantenimiento de computadores</div>
+        <div class="card">Infraestructura IT</div>
+        <div class="card">Soporte empresarial</div>
+        <div class="card">CCTV</div>
+        <div class="card">Biometría</div>
+        <div class="card">Correo corporativo</div>
+        <div class="card">Mantenimiento</div>
     </div>
 </section>
 
-<section class="value">
+<section class="value reveal">
     <h2>¿Por qué elegirnos?</h2>
     <p>Nos encargamos de toda tu tecnología para que tú te enfoques en tu negocio.</p>
-    <br>
-    <p>✔ Respuesta rápida | ✔ Soluciones integrales | ✔ Experiencia real | ✔ Soporte confiable</p>
 </section>
 
-<section class="process">
+<section class="process reveal">
     <h2>Cómo trabajamos</h2>
     <div class="steps">
         <div class="step">Diagnóstico</div>
@@ -285,20 +246,70 @@ footer {
     </div>
 </section>
 
-<section class="cta">
-    <h2>¿Necesitas ayuda con tu tecnología?</h2>
-    <br>
-    <a href="#" class="btn">Contáctanos</a>
+<section class="cta reveal">
+    <h2>¿Necesitas ayuda?</h2>
+    <a href="https://wa.me/573239646992" class="btn">Contáctanos</a>
 </section>
 
 </div>
 
 <footer>
-    <p>AXENTRIX by Masters Technologies</p>
-    <p>Colombia</p>
+    AXENTRIX by Masters Technologies
 </footer>
 
 <a href="https://wa.me/573239646992" class="whatsapp">💬</a>
+
+<script>
+// PARTICLES
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: Math.random() * 0.5,
+        vy: Math.random() * 0.5
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#06B6D4";
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", () => {
+    reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add("active");
+        }
+    });
+});
+</script>
 
 </body>
 </html>
