@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axentrix — Infraestructura y Soluciones Tecnológicas</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #1a2354;
+  --blue:    #1a6fd8;
+  --cyan:    #00b4d8;
+  --light:   #f4f6fb;
+  --white:   #ffffff;
+  --gray:    #6b7280;
+  --dark:    #0d1530;
+  --border:  rgba(26,111,216,0.12);
+  --shadow:  0 4px 24px rgba(26,35,84,0.10);
+  --shadow-lg: 0 12px 48px rgba(26,35,84,0.16);
+  --r: 12px;
+  --r-lg: 20px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:999;transition:width .1s;box-shadow:0 0 8px rgba(0,180,216,.5);}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:all .3s;}
+nav.scrolled{box-shadow:var(--shadow);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.logo-wrap{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0;}
+.logo-text{font-size:1.3rem;font-weight:800;letter-spacing:.05em;color:var(--navy);line-height:1;}
+.logo-sub{font-size:.52rem;font-weight:500;letter-spacing:.06em;color:var(--blue);text-transform:uppercase;line-height:1;margin-top:2px;}
+.nav-links{display:flex;gap:1.75rem;list-style:none;align-items:center;}
+.nav-links a{font-size:.82rem;font-weight:500;color:var(--gray);text-decoration:none;letter-spacing:.02em;transition:color .2s;position:relative;padding-bottom:2px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--blue);transition:width .3s;border-radius:2px;}
+.nav-links a:hover{color:var(--navy);}
+.nav-links a:hover::after{width:100%;}
+.nav-btn{padding:.55rem 1.25rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.8rem;letter-spacing:.03em;transition:transform .2s,box-shadow .2s!important;white-space:nowrap;}
+.nav-btn::after{display:none!important;}
+.nav-btn:hover{transform:translateY(-1px)!important;box-shadow:0 6px 20px rgba(26,111,216,.35)!important;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:none;background:transparent;}
+.ham span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;z-index:99;box-shadow:var(--shadow);}
+.mobile-menu.open{display:block;}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.mobile-menu a{font-size:.9rem;font-weight:500;color:var(--navy);text-decoration:none;display:block;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.mobile-menu .mob-btn{margin-top:.75rem;display:block;text-align:center;padding:.75rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.9rem;border-bottom:none!important;}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(135deg,var(--dark) 0%,var(--navy) 55%,#1a3a7a 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:72px;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,216,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.07) 1px,transparent 1px);background-size:50px 50px;}
+.hero::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,216,.18) 0%,transparent 65%);top:-100px;right:-100px;animation:orb 8s ease-in-out infinite;}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,20px) scale(1.05);}}
+.hero-orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(26,111,216,.12) 0%,transparent 65%);bottom:-80px;left:-80px;animation:orb 11s ease-in-out infinite reverse;}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:4rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;width:100%;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .9rem;background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.3);border-radius:100px;font-size:.72rem;font-weight:600;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero h1{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;line-height:1.1;color:var(--white);margin-bottom:1.25rem;letter-spacing:-.02em;}
+.hero h1 .hl{background:linear-gradient(90deg,var(--cyan),#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:2.25rem;font-weight:400;max-width:480px;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.75rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border:none;border-radius:var(--r);font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;letter-spacing:.02em;white-space:nowrap;}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .5s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,180,216,.4);}
+.btn-primary:hover::before{transform:translateX(100%);}
+.btn-primary:active{transform:translateY(0) scale(.98);}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.75rem;background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.3);border-radius:var(--r);font-family:'Montserrat',sans-serif;font-size:.875rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,180,216,.08);}
+
+/* Hero visual */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;}
+.hero-card-main{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);padding:2rem;backdrop-filter:blur(12px);width:100%;max-width:360px;}
+.hc-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.25rem;}
+.hc-row{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;border-radius:8px;background:rgba(255,255,255,.04);margin-bottom:.5rem;border:1px solid rgba(255,255,255,.06);transition:background .2s;cursor:default;}
+.hc-row:hover{background:rgba(255,255,255,.1);}
+.hc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.hc-icon.blue{background:rgba(26,111,216,.3);}
+.hc-icon.cyan{background:rgba(0,180,216,.25);}
+.hc-icon.teal{background:rgba(20,200,150,.2);}
+.hc-info{flex:1;min-width:0;}
+.hc-name{font-size:.78rem;font-weight:600;color:var(--white);margin-bottom:1px;}
+.hc-sub{font-size:.66rem;color:rgba(255,255,255,.45);}
+.hc-status{font-size:.64rem;font-weight:700;padding:.25rem .6rem;border-radius:100px;white-space:nowrap;}
+.status-ok{background:rgba(52,211,153,.15);color:#6ee7b7;}
+.status-new{background:rgba(0,180,216,.2);color:var(--cyan);}
+.hero-float{position:absolute;background:var(--white);border-radius:10px;padding:.65rem .85rem;box-shadow:0 8px 30px rgba(0,0,0,.28);font-size:.72rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:.5rem;white-space:nowrap;}
+.hf1{bottom:-1rem;left:-1rem;animation:float1 4s ease-in-out infinite;}
+.hf2{top:-1rem;right:-1rem;animation:float2 5s ease-in-out infinite;}
+.hf-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.hf-dot.g{background:#34d399;}
+.hf-dot.b{background:var(--cyan);}
+@keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+/* STATS */
+.stats{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-inner{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.stat{text-align:center;padding:1.25rem .5rem;position:relative;transition:transform .2s;cursor:default;}
+.stat:hover{transform:translateY(-3px);}
+.stat:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--border);}
+.stat-n{font-size:2.25rem;font-weight:800;color:var(--navy);line-height:1;margin-bottom:.3rem;}
+.stat-n span{color:var(--blue);}
+.stat-l{font-size:.72rem;color:var(--gray);font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+
+/* SECTION */
+.section{padding:5rem 1.5rem;}
+.section-inner{max-width:1200px;margin:0 auto;}
+.s-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+h2.section-title{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:800;line-height:1.1;color:var(--navy);margin-bottom:.9rem;letter-spacing:-.02em;}
+.section-sub{font-size:.95rem;color:var(--gray);line-height:1.7;max-width:520px;font-weight:400;}
+.section-header{margin-bottom:3.5rem;}
+.centered{text-align:center;}
+.centered .section-sub{margin:0 auto;}
+
+/* PRODUCTS */
+.products{background:var(--light);}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;}
+.prod-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:1.75rem;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;}
+.prod-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.prod-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(26,111,216,.25);}
+.prod-card:hover::before{transform:scaleX(1);}
+.prod-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;background:linear-gradient(135deg,rgba(26,111,216,.1),rgba(0,180,216,.08));border:1px solid rgba(26,111,216,.12);transition:transform .3s;}
+.prod-card:hover .prod-icon{transform:scale(1.1) rotate(4deg);}
+.prod-card h3{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;}
+.prod-card p{font-size:.82rem;color:var(--gray);line-height:1.65;}
+.prod-tag{display:inline-block;margin-top:.9rem;font-size:.68rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;letter-spacing:.05em;}
+.tag-blue{background:rgba(26,111,216,.1);color:var(--blue);}
+.tag-cyan{background:rgba(0,180,216,.1);color:#0891b2;}
+.tag-green{background:rgba(52,211,153,.15);color:#059669;}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.svc-card{background:var(--white);border-radius:var(--r-lg);border:1.5px solid var(--border);padding:2.25rem;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;}
+.svc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--blue);}
+.svc-number{font-size:3.5rem;font-weight:900;color:rgba(26,111,216,.07);position:absolute;top:1rem;right:1.5rem;line-height:1;font-style:italic;transition:color .3s;}
+.svc-card:hover .svc-number{color:rgba(26,111,216,.14);}
+.svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.5rem;position:relative;z-index:1;transition:transform .3s,box-shadow .3s;}
+.svc-card:hover .svc-icon{transform:scale(1.08);box-shadow:0 6px 20px rgba(26,111,216,.2);}
+.icon-navy{background:linear-gradient(135deg,var(--navy),#2a3f8a);}
+.icon-blue{background:linear-gradient(135deg,var(--blue),#2b88ef);}
+.icon-cyan{background:linear-gradient(135deg,var(--cyan),#38bdf8);}
+.icon-teal{background:linear-gradient(135deg,#0891b2,var(--cyan));}
+.svc-card h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;}
+.svc-card p{font-size:.84rem;color:var(--gray);line-height:1.7;}
+.svc-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:1.25rem;font-size:.8rem;font-weight:700;color:var(--blue);text-decoration:none;opacity:0;transform:translateX(-6px);transition:all .3s;}
+.svc-card:hover .svc-link{opacity:1;transform:translateX(0);}
+
+/* WHY */
+.why{background:var(--light);}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.why-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,var(--dark),var(--navy));min-height:420px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(26,111,216,.2);}
+.why-visual-inner{width:90%;padding:1.5rem;}
+.metric-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:.75rem;display:flex;align-items:center;gap:1rem;transition:background .2s;cursor:default;}
+.metric-card:hover{background:rgba(255,255,255,.1);}
+.metric-icon{font-size:1.5rem;flex-shrink:0;}
+.metric-info{flex:1;}
+.metric-name{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:.25rem;}
+.metric-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;}
+.metric-fill{height:100%;border-radius:3px;animation:fillBar 1.5s ease forwards;}
+@keyframes fillBar{from{width:0;}}
+.fill-blue{background:linear-gradient(90deg,var(--blue),var(--cyan));}
+.fill-cyan{background:linear-gradient(90deg,var(--cyan),#38bdf8);}
+.fill-green{background:linear-gradient(90deg,#34d399,#6ee7b7);}
+.metric-val{font-size:.9rem;font-weight:800;color:var(--white);flex-shrink:0;}
+.why-points{display:flex;flex-direction:column;gap:1.5rem;}
+.why-point{display:flex;gap:1rem;padding:1.25rem 1.5rem;border-radius:var(--r);border:1px solid transparent;transition:all .25s;cursor:default;}
+.why-point:hover{background:var(--white);border-color:var(--border);box-shadow:var(--shadow);}
+.wp-icon{width:44px;height:44px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:linear-gradient(135deg,rgba(26,111,216,.1),rgba(0,180,216,.08));border:1px solid rgba(26,111,216,.12);transition:transform .25s;}
+.why-point:hover .wp-icon{transform:scale(1.08);}
+.wp-info h4{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.35rem;}
+.wp-info p{font-size:.82rem;color:var(--gray);line-height:1.65;}
+
+/* HOW */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;}
+.how-grid::before{content:'';position:absolute;top:2.75rem;left:12%;width:76%;height:1px;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:.2;}
+.how-step{text-align:center;padding:1.5rem 1rem;border-radius:var(--r);transition:all .25s;cursor:default;}
+.how-step:hover{background:var(--light);transform:translateY(-4px);}
+.how-num{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.1rem;font-weight:800;color:var(--white);position:relative;z-index:1;transition:box-shadow .25s;}
+.how-step:hover .how-num{box-shadow:0 6px 20px rgba(26,111,216,.35);}
+.how-step h3{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;}
+.how-step p{font-size:.8rem;color:var(--gray);line-height:1.65;}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--light);}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.testi-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border);padding:2rem;transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.testi-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.testi-card:hover::before{transform:scaleX(1);}
+.testi-stars{color:#f59e0b;font-size:1rem;letter-spacing:.1em;margin-bottom:1rem;}
+.testi-text{font-size:.85rem;color:var(--gray);line-height:1.75;margin-bottom:1.5rem;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:.75rem;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;flex-shrink:0;}
+.testi-name{font-size:.85rem;font-weight:700;color:var(--navy);}
+.testi-role{font-size:.72rem;color:var(--gray);}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px;margin:0 auto;}
+.price-card{background:var(--white);border-radius:var(--r-lg);border:1.5px solid var(--border);padding:2.25rem 2rem;position:relative;overflow:hidden;transition:all .3s;cursor:pointer;}
+.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.price-card.feat{border-color:var(--blue);background:linear-gradient(160deg,#f0f7ff,#e8f3ff);}
+.price-card.feat:hover{box-shadow:0 16px 48px rgba(26,111,216,.25);}
+.feat-badge{position:absolute;top:1.25rem;right:1.25rem;padding:.25rem .75rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border-radius:100px;font-size:.65rem;font-weight:700;letter-spacing:.06em;}
+.price-plan{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+.price-amount{font-size:2.75rem;font-weight:800;color:var(--navy);line-height:1;margin-bottom:.25rem;}
+.price-amount sup{font-size:1.4rem;vertical-align:super;color:var(--gray);}
+.price-period{font-size:.78rem;color:var(--gray);margin-bottom:1.75rem;}
+.price-features{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.65rem;}
+.price-features li{font-size:.82rem;color:var(--gray);display:flex;align-items:flex-start;gap:.6rem;}
+.price-features .ck{color:var(--blue);font-size:.7rem;margin-top:2px;flex-shrink:0;}
+.price-features .off{opacity:.4;}
+.price-features .off .ck{color:var(--gray);}
+.price-btn{width:100%;padding:.8rem;border-radius:var(--r);font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em;}
+.price-btn.outline-btn{background:transparent;border:1.5px solid var(--border);color:var(--navy);}
+.price-btn.outline-btn:hover{border-color:var(--blue);color:var(--blue);background:rgba(26,111,216,.04);}
+.price-btn.filled-btn{background:linear-gradient(135deg,var(--blue),var(--cyan));border:none;color:var(--white);position:relative;overflow:hidden;}
+.price-btn.filled-btn:hover{box-shadow:0 6px 24px rgba(26,111,216,.35);transform:translateY(-1px);}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--dark) 0%,var(--navy) 60%,#1a3a7a 100%);padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.06) 1px,transparent 1px);background-size:50px 50px;}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+.cta-inner h2{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:800;color:var(--white);margin-bottom:1rem;letter-spacing:-.02em;}
+.cta-inner p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.7;margin-bottom:2.25rem;}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.footer-brand .logo-text{color:var(--white);}
+.footer-brand .logo-sub{color:var(--cyan);}
+.footer-brand p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:.9rem;max-width:240px;}
+.footer-col h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.25rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.footer-col a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.3);}
+.footer-bottom a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.footer-bottom a:hover{color:var(--cyan);}
+
+/* RIPPLE */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:rpl .6s linear;pointer-events:none;}
+@keyframes rpl{to{transform:scale(4);opacity:0;}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .hero-inner{gap:2rem;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;padding:3rem 1.5rem;}
+  .hero-visual{display:none;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(2)::after,.stat:nth-child(4)::after{display:none;}
+  .why-grid{grid-template-columns:1fr;}
+  .how-grid{grid-template-columns:repeat(2,1fr);}
+  .how-grid::before{display:none;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .footer-brand{grid-column:1/-1;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .ham{display:flex;}
+  .nav-btn{display:none;}
+  .hero{padding-top:68px;}
+  .hero-inner{padding:2.5rem 1.25rem;}
+  .hero h1{font-size:1.9rem;}
+  .hero-desc{font-size:.92rem;}
+  .hero-actions{gap:.75rem;}
+  .btn-primary,.btn-outline{padding:.75rem 1.25rem;font-size:.82rem;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);padding:1.75rem 1.25rem;}
+  .stat:not(:last-child)::after{display:none;}
+  .stat-n{font-size:1.75rem;}
+  .section{padding:3.5rem 1.25rem;}
+  h2.section-title{font-size:1.6rem;}
+  .products-grid,.services-grid,.testi-grid,.pricing-grid{grid-template-columns:1fr;}
+  .how-grid{grid-template-columns:1fr;gap:1rem;}
+  .why-grid{grid-template-columns:1fr;}
+  .pricing-grid{max-width:100%;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .cta-actions{flex-direction:column;align-items:center;}
+  .cta-actions .btn-primary,.cta-actions .btn-outline{width:100%;max-width:280px;justify-content:center;}
+}
+@media(min-width:1400px){
+  .hero-inner,.stats-inner,.section-inner,.footer-inner{max-width:1300px;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo-wrap" aria-label="Axentrix - Inicio">
+      <svg width="38" height="38" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="none" stroke="url(#hg)" stroke-width="3.5" stroke-linejoin="round"/>
+        <line x1="40" y1="16" x2="20" y2="62" stroke="url(#lg1)" stroke-width="4" stroke-linecap="round"/>
+        <line x1="40" y1="16" x2="60" y2="62" stroke="url(#lg2)" stroke-width="4" stroke-linecap="round"/>
+        <line x1="28" y1="46" x2="52" y2="46" stroke="url(#lg3)" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="40" cy="16" r="5" fill="#00b4d8"/>
+        <circle cx="20" cy="62" r="4.5" fill="#1a6fd8"/>
+        <circle cx="60" cy="62" r="4.5" fill="#1a6fd8"/>
+        <circle cx="28" cy="46" r="3.5" fill="#38bdf8"/>
+        <circle cx="52" cy="46" r="3.5" fill="#38bdf8"/>
+        <circle cx="40" cy="31" r="3" fill="white" fill-opacity="0.5"/>
+        <circle cx="72" cy="22" r="3" fill="#1a6fd8" fill-opacity="0.6"/>
+        <circle cx="72" cy="58" r="3" fill="#1a6fd8" fill-opacity="0.6"/>
+        <circle cx="8"  cy="22" r="3" fill="#1a6fd8" fill-opacity="0.6"/>
+        <circle cx="8"  cy="58" r="3" fill="#1a6fd8" fill-opacity="0.6"/>
+        <defs>
+          <linearGradient id="hg" x1="8" y1="4" x2="72" y2="76" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1a6fd8"/><stop offset="100%" stop-color="#00b4d8"/>
+          </linearGradient>
+          <linearGradient id="lg1" x1="40" y1="16" x2="20" y2="62" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00b4d8"/><stop offset="100%" stop-color="#1a6fd8"/>
+          </linearGradient>
+          <linearGradient id="lg2" x1="40" y1="16" x2="60" y2="62" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00b4d8"/><stop offset="100%" stop-color="#1a6fd8"/>
+          </linearGradient>
+          <linearGradient id="lg3" x1="28" y1="46" x2="52" y2="46" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1a6fd8"/><stop offset="100%" stop-color="#38bdf8"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div>
+        <div class="logo-text">AXENTRIX</div>
+        <div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#por-que">¿Por qué nosotros?</a></li>
+      <li><a href="#precios">Planes</a></li>
+      <li><a href="#contacto" class="nav-btn">Cotizar ahora →</a></li>
+    </ul>
+    <button class="ham" id="ham" aria-label="Menú" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobMenu">
+  <ul>
+    <li><a href="#productos" onclick="closeMenu()">Productos</a></li>
+    <li><a href="#servicios" onclick="closeMenu()">Servicios</a></li>
+    <li><a href="#por-que" onclick="closeMenu()">¿Por qué nosotros?</a></li>
+    <li><a href="#precios" onclick="closeMenu()">Planes</a></li>
+    <li><a href="#contacto" class="mob-btn" onclick="closeMenu()">Cotizar ahora →</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Tu aliado tecnológico de confianza
+      </div>
+      <h1>Tecnología que<br><span class="hl">impulsa tu operación</span></h1>
+      <p class="hero-desc">Desde un celular hasta toda la infraestructura de tu empresa — equipos, soluciones y soporte técnico que necesitas para crecer con confianza.</p>
+      <div class="hero-actions">
+        <a href="#productos" class="btn-primary" onclick="addRipple(event,this)">
+          Ver productos y servicios
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://wa.me/573239646992" class="btn-outline">Hablar con un asesor</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div style="position:relative;width:100%;max-width:360px;">
+        <div class="hero-card-main">
+          <div class="hc-label">Soluciones disponibles</div>
+          <div class="hc-row">
+            <div class="hc-icon blue">💻</div>
+            <div class="hc-info"><div class="hc-name">Computadores y Laptops</div><div class="hc-sub">Marcas líderes · garantía incluida</div></div>
+            <span class="hc-status status-ok">Disponible</span>
+          </div>
+          <div class="hc-row">
+            <div class="hc-icon cyan">📱</div>
+            <div class="hc-info"><div class="hc-name">Celulares y Tablets</div><div class="hc-sub">Desbloqueados · todas las gamas</div></div>
+            <span class="hc-status status-ok">Disponible</span>
+          </div>
+          <div class="hc-row">
+            <div class="hc-icon teal">🔧</div>
+            <div class="hc-info"><div class="hc-name">Mantenimiento y Reparación</div><div class="hc-sub">Diagnóstico gratuito · express</div></div>
+            <span class="hc-status status-new">24–48 h</span>
+          </div>
+          <div class="hc-row">
+            <div class="hc-icon blue">☁️</div>
+            <div class="hc-info"><div class="hc-name">Office 365 / Google Workspace</div><div class="hc-sub">Migración · licencias · soporte</div></div>
+            <span class="hc-status status-ok">Activo</span>
+          </div>
+        </div>
+        <div class="hero-float hf1"><span class="hf-dot g"></span><span>+200 clientes satisfechos</span></div>
+        <div class="hero-float hf2"><span class="hf-dot b"></span><span>Soporte técnico 7 días</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat reveal"><div class="stat-n">+<span>400</span></div><div class="stat-l">Clientes atendidos</div></div>
+    <div class="stat reveal" style="transition-delay:.1s"><div class="stat-n"><span>7</span> días</div><div class="stat-l">Soporte semanal</div></div>
+    <div class="stat reveal" style="transition-delay:.2s"><div class="stat-n"><span>48</span> h</div><div class="stat-l">Tiempo de respuesta</div></div>
+    <div class="stat reveal" style="transition-delay:.3s"><div class="stat-n"><span>5</span>★</div><div class="stat-l">Calificación promedio</div></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section products" id="productos">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="s-tag">Productos</span>
+      <h2 class="section-title">Tecnología para cada necesidad</h2>
+      <p class="section-sub">Equipos de calidad para personas y empresas, con asesoría personalizada para elegir la mejor opción.</p>
+    </div>
+    <div class="products-grid">
+      <div class="prod-card reveal">
+        <div class="prod-icon">💻</div>
+        <h3>Computadores y Laptops</h3>
+        <p>Equipos de escritorio y portátiles HP, Lenovo, Dell, Apple. Para el hogar, la oficina o el trabajo profesional, con garantía y soporte.</p>
+        <span class="prod-tag tag-blue">Personas · Empresas</span>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.08s">
+        <div class="prod-icon">📱</div>
+        <h3>Celulares y Smartphones</h3>
+        <p>Amplio catálogo Samsung, iPhone, Motorola y más. Todas las gamas, desbloqueados y con garantía oficial del fabricante.</p>
+        <span class="prod-tag tag-cyan">Todas las gamas</span>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.16s">
+        <div class="prod-icon">📟</div>
+        <h3>Tablets</h3>
+        <p>iPad, Samsung Galaxy Tab, Lenovo y más para estudio, trabajo y entretenimiento. Versiones Wi-Fi y con conectividad celular.</p>
+        <span class="prod-tag tag-blue">Estudio · Trabajo</span>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.24s">
+        <div class="prod-icon">🖨️</div>
+        <h3>Impresoras y Accesorios</h3>
+        <p>Impresoras de tinta, láser y multifuncionales para hogar y oficina. Tintas y tóners originales y compatibles a buen precio.</p>
+        <span class="prod-tag tag-green">Hogar · Oficina</span>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.32s">
+        <div class="prod-icon">🖥️</div>
+        <h3>Periféricos y Accesorios</h3>
+        <p>Monitores, teclados, mouse, auriculares, webcams y hubs USB. Todo lo que necesitas para completar tu espacio de trabajo.</p>
+        <span class="prod-tag tag-cyan">Completa tu setup</span>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.4s">
+        <div class="prod-icon">🔌</div>
+        <h3>Redes y Conectividad</h3>
+        <p>Routers, switches, access points Wi-Fi y cableado estructurado para que tu hogar o negocio siempre esté conectado y seguro.</p>
+        <span class="prod-tag tag-blue">Hogares · Pymes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="servicios">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="s-tag">Servicios Técnicos</span>
+      <h2 class="section-title">Soporte y soluciones a tu medida</h2>
+      <p class="section-sub">Desde reparar tu celular hasta administrar toda la infraestructura tecnológica de tu empresa.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <span class="svc-number">01</span>
+        <div class="svc-icon icon-blue"><span>🔧</span></div>
+        <h3>Mantenimiento y Reparación</h3>
+        <p>Diagnóstico gratuito. Reparamos pantallas, baterías, teclados y placas madre en computadores, celulares, tablets e impresoras. Repuestos originales y garantía de servicio.</p>
+        <a href="#contacto" class="svc-link">Solicitar servicio →</a>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.1s">
+        <span class="svc-number">02</span>
+        <div class="svc-icon icon-cyan"><span>👆</span></div>
+        <h3>Biometría y Control de Acceso</h3>
+        <p>Implementamos sistemas de control de tiempo y asistencia con huella digital, reconocimiento facial o tarjeta RFID. Ideales para pymes que quieren automatizar el registro de personal.</p>
+        <a href="#contacto" class="svc-link">Solicitar servicio →</a>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.2s">
+        <span class="svc-number">03</span>
+        <div class="svc-icon icon-navy"><span>☁️</span></div>
+        <h3>Migración a la Nube</h3>
+        <p>Llevamos tu empresa a Microsoft 365 o Google Workspace: correo corporativo, almacenamiento y colaboración en la nube. Gestionamos licencias, migración de datos y capacitamos a tu equipo.</p>
+        <a href="#contacto" class="svc-link">Conocer más →</a>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.3s">
+        <span class="svc-number">04</span>
+        <div class="svc-icon icon-teal"><span>🌐</span></div>
+        <h3>Infraestructura Tecnológica</h3>
+        <p>Diseñamos, desplegamos y administramos redes, servidores y equipos activos de tu empresa. Cableado estructurado, VPN, firewalls, backups automáticos y monitoreo continuo.</p>
+        <a href="#contacto" class="svc-link">Cotizar proyecto →</a>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.4s">
+        <span class="svc-number">05</span>
+        <div class="svc-icon icon-blue"><span>🛡️</span></div>
+        <h3>Ciberseguridad Básica</h3>
+        <p>Protegemos tus dispositivos y red empresarial con antivirus, políticas de acceso seguro y protección contra ransomware. Soluciones prácticas para micro y pequeñas empresas.</p>
+        <a href="#contacto" class="svc-link">Proteger mi empresa →</a>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.5s">
+        <span class="svc-number">06</span>
+        <div class="svc-icon icon-cyan"><span>🎓</span></div>
+        <h3>Capacitación y Acompañamiento</h3>
+        <p>Entrenamos a tu equipo en las herramientas implementadas. Soporte remoto, tutoriales y acompañamiento continuo para que aproveches al máximo tu inversión tecnológica.</p>
+        <a href="#contacto" class="svc-link">Ver opciones →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section why" id="por-que">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-visual reveal">
+        <div class="why-visual-inner">
+          <div class="hc-label" style="color:rgba(255,255,255,.45);margin-bottom:1.25rem;">Impacto real en tu negocio</div>
+          <div class="metric-card">
+            <span class="metric-icon">⏱️</span>
+            <div class="metric-info"><div class="metric-name">Reducción de tiempos operativos</div><div class="metric-bar"><div class="metric-fill fill-blue" style="width:78%"></div></div></div>
+            <span class="metric-val">78%</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-icon">💰</span>
+            <div class="metric-info"><div class="metric-name">Ahorro en costos de TI</div><div class="metric-bar"><div class="metric-fill fill-cyan" style="width:55%;animation-delay:.3s"></div></div></div>
+            <span class="metric-val">55%</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-icon">📈</span>
+            <div class="metric-info"><div class="metric-name">Aumento de productividad</div><div class="metric-bar"><div class="metric-fill fill-green" style="width:91%;animation-delay:.6s"></div></div></div>
+            <span class="metric-val">91%</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-icon">😊</span>
+            <div class="metric-info"><div class="metric-name">Satisfacción del cliente</div><div class="metric-bar"><div class="metric-fill fill-blue" style="width:96%;animation-delay:.9s"></div></div></div>
+            <span class="metric-val">96%</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.2s">
+        <span class="s-tag">¿Por qué Axentrix?</span>
+        <h2 class="section-title">Tu tecnología en manos expertas</h2>
+        <p class="section-sub" style="margin-bottom:2rem">No somos una caja de despacho: somos tu aliado tecnológico de largo plazo, enfocados en que cada peso invertido genere resultados reales.</p>
+        <div class="why-points">
+          <div class="why-point"><div class="wp-icon">🤝</div><div class="wp-info"><h4>Asesoría personalizada</h4><p>Te ayudamos a elegir la solución correcta según tu presupuesto y necesidades, sin empujarte a comprar lo que no necesitas.</p></div></div>
+          <div class="why-point"><div class="wp-icon">⚡</div><div class="wp-info"><h4>Respuesta rápida</h4><p>Atención presencial y remota. Cuando la tecnología falla, tu negocio no puede esperar — respondemos en menos de 48 horas.</p></div></div>
+          <div class="why-point"><div class="wp-icon">🔒</div><div class="wp-info"><h4>Garantía y respaldo</h4><p>Todos nuestros equipos y servicios tienen garantía. Te acompañamos incluso después de la venta o instalación.</p></div></div>
+          <div class="why-point"><div class="wp-icon">💡</div><div class="wp-info"><h4>Lenguaje claro, sin tecnicismos</h4><p>Explicamos todo en términos simples para que tomes decisiones informadas. Tú controlas tu tecnología.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header centered reveal">
+      <span class="s-tag">¿Cómo trabajamos?</span>
+      <h2 class="section-title">Sencillo, rápido y transparente</h2>
+      <p class="section-sub">Un proceso diseñado para darte tranquilidad en cada paso.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal"><div class="how-num">01</div><h3>Nos contactas</h3><p>Escríbenos o visítanos. Cuéntanos qué necesitas: un equipo, una reparación o una solución para tu empresa.</p></div>
+      <div class="how-step reveal" style="transition-delay:.15s"><div class="how-num">02</div><h3>Diagnóstico gratuito</h3><p>Evaluamos tu situación actual sin costo. Opciones con precios claros y sin sorpresas ocultas.</p></div>
+      <div class="how-step reveal" style="transition-delay:.3s"><div class="how-num">03</div><h3>Implementación ágil</h3><p>Entregamos tu equipo o ejecutamos el servicio en los tiempos acordados, con instalación y configuración incluida.</p></div>
+      <div class="how-step reveal" style="transition-delay:.45s"><div class="how-num">04</div><h3>Soporte continuo</h3><p>No desaparecemos al terminar. Seguimos disponibles para dudas, mantenimientos y nuevas necesidades.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials">
+  <div class="section-inner">
+    <div class="section-header centered reveal">
+      <span class="s-tag">Testimonios</span>
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-sub">Personas y negocios que confiaron en Axentrix para su tecnología.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Llevé mi laptop a reparar por un problema de batería. El diagnóstico fue gratis, me explicaron todo y al día siguiente ya estaba lista. Excelente servicio y precio justo."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(26,111,216,.1);color:var(--blue)">MG</div><div><div class="testi-name">María González</div><div class="testi-role">Docente universitaria</div></div></div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.15s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Nos migraron a Google Workspace en dos días sin perder ningún correo. El equipo nos capacitó y ahora toda la empresa trabaja mucho mejor. ¡100% recomendados!"</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(0,180,216,.1);color:#0891b2">CR</div><div><div class="testi-name">Carlos Romero</div><div class="testi-role">Gerente · Distribuidora CR</div></div></div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.3s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Instalaron la biometría en nuestra oficina en menos de una jornada. Ahora el control de asistencia es automático y ahorramos horas de trabajo manual al mes."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(52,211,153,.15);color:#059669">LM</div><div><div class="testi-name">Laura Medina</div><div class="testi-role">Directora RH · Pyme Bogotá</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="precios">
+  <div class="section-inner">
+    <div class="section-header centered reveal">
+      <span class="s-tag">Planes de Soporte</span>
+      <h2 class="section-title">Soporte tecnológico para cada tamaño</h2>
+      <p class="section-sub">Elige el plan de mantenimiento que mejor se adapte a ti o tu empresa.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-plan">Personal</div>
+        <div class="price-amount"><sup>$</sup>89<span style="font-size:1.2rem;color:var(--gray)">.900</span></div>
+        <div class="price-period">/ mes · 1 dispositivo</div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> Soporte remoto ilimitado</li>
+          <li><span class="ck">✓</span> Mantenimiento preventivo x1</li>
+          <li><span class="ck">✓</span> Actualización de software</li>
+          <li><span class="ck">✓</span> Atención en máximo 4 horas</li>
+          <li class="off"><span class="ck">×</span> Visita técnica domiciliaria</li>
+          <li class="off"><span class="ck">×</span> Gestión de infraestructura</li>
+        </ul>
+        <button class="price-btn outline-btn" onclick="addRipple(event,this)">Comenzar</button>
+      </div>
+      <div class="price-card feat reveal" style="transition-delay:.15s">
+        <span class="feat-badge">Más popular</span>
+        <div class="price-plan">Pyme</div>
+        <div class="price-amount"><sup>$</sup>249<span style="font-size:1.2rem;color:#4a7fb5">.900</span></div>
+        <div class="price-period">/ mes · hasta 10 equipos</div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> Soporte remoto ilimitado</li>
+          <li><span class="ck">✓</span> Mantenimiento preventivo x2</li>
+          <li><span class="ck">✓</span> 1 visita técnica mensual</li>
+          <li><span class="ck">✓</span> Gestión Microsoft / Google</li>
+          <li><span class="ck">✓</span> Soporte biometría</li>
+          <li><span class="ck">✓</span> Atención prioritaria 24 h</li>
+        </ul>
+        <button class="price-btn filled-btn" onclick="addRipple(event,this)">Solicitar plan</button>
+      </div>
+      <div class="price-card reveal" style="transition-delay:.3s">
+        <div class="price-plan">Corporativo</div>
+        <div class="price-amount" style="font-size:2rem;">A medida</div>
+        <div class="price-period">Equipos ilimitados</div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> Todo en Pyme</li>
+          <li><span class="ck">✓</span> Administración de red</li>
+          <li><span class="ck">✓</span> Infraestructura completa</li>
+          <li><span class="ck">✓</span> SLA garantizado</li>
+          <li><span class="ck">✓</span> Ingeniero dedicado</li>
+          <li><span class="ck">✓</span> Presencia on-site</li>
+        </ul>
+        <button class="price-btn outline-btn" onclick="addRipple(event,this)">Cotizar ahora</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner">
+    <div class="hero-badge" style="margin-bottom:1.5rem;background:rgba(0,180,216,.15);display:inline-flex;">
+      <span class="badge-dot"></span>Estamos listos para ayudarte
+    </div>
+    <h2>¿Listo para potenciar tu tecnología?</h2>
+    <p>Cuéntanos qué necesitas: un equipo nuevo, una reparación urgente o la transformación digital de tu empresa. Te respondemos en menos de 24 horas.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/573239646992" class="btn-primary" onclick="addRipple(event,this)" target="_blank" rel="noopener">
+        💬 Escribir por WhatsApp
+      </a>
+      <a href="mailto:daniel.vasquez@axentrix.co" class="btn-outline">✉️ Enviar correo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo-wrap">
+          <svg width="34" height="34" viewBox="0 0 80 80" fill="none">
+            <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="none" stroke="url(#fg)" stroke-width="3.5" stroke-linejoin="round"/>
+            <line x1="40" y1="16" x2="20" y2="62" stroke="url(#fl1)" stroke-width="4" stroke-linecap="round"/>
+            <line x1="40" y1="16" x2="60" y2="62" stroke="url(#fl2)" stroke-width="4" stroke-linecap="round"/>
+            <line x1="28" y1="46" x2="52" y2="46" stroke="url(#fl3)" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="40" cy="16" r="5" fill="#00b4d8"/><circle cx="20" cy="62" r="4.5" fill="#1a6fd8"/>
+            <circle cx="60" cy="62" r="4.5" fill="#1a6fd8"/><circle cx="28" cy="46" r="3.5" fill="#38bdf8"/>
+            <circle cx="52" cy="46" r="3.5" fill="#38bdf8"/>
+            <defs>
+              <linearGradient id="fg" x1="8" y1="4" x2="72" y2="76" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a6fd8"/><stop offset="100%" stop-color="#00b4d8"/></linearGradient>
+              <linearGradient id="fl1" x1="40" y1="16" x2="20" y2="62" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00b4d8"/><stop offset="100%" stop-color="#1a6fd8"/></linearGradient>
+              <linearGradient id="fl2" x1="40" y1="16" x2="60" y2="62" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00b4d8"/><stop offset="100%" stop-color="#1a6fd8"/></linearGradient>
+              <linearGradient id="fl3" x1="28" y1="46" x2="52" y2="46" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a6fd8"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+            </defs>
+          </svg>
+          <div><div class="logo-text">AXENTRIX</div><div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div></div>
+        </a>
+        <p>Tu aliado tecnológico de confianza. Equipos, soluciones y soporte para personas, micro y pequeñas empresas.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#productos">Computadores</a></li>
+          <li><a href="#productos">Celulares</a></li>
+          <li><a href="#productos">Tablets</a></li>
+          <li><a href="#productos">Impresoras</a></li>
+          <li><a href="#productos">Redes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Mantenimiento</a></li>
+          <li><a href="#servicios">Biometría</a></li>
+          <li><a href="#servicios">Office 365 / G.Workspace</a></li>
+          <li><a href="#servicios">Infraestructura IT</a></li>
+          <li><a href="#servicios">Ciberseguridad</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#por-que">¿Por qué Axentrix?</a></li>
+          <li><a href="#precios">Planes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="https://wa.me/573239646992" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Axentrix — Infraestructura y Soluciones Tecnológicas. Todos los derechos reservados.</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
+        <a href="#">Privacidad</a><a href="#">Términos</a><a href="#">www.axentrix.co</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  revealAll();
+});
+
+function revealAll(){
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight - 70) el.classList.add('visible');
+  });
+}
+setTimeout(revealAll, 120);
+
+function addRipple(e, el){
+  const r = el.getBoundingClientRect();
+  const s = document.createElement('span');
+  s.classList.add('ripple');
+  const d = Math.max(r.width, r.height);
+  s.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+  el.appendChild(s); setTimeout(()=>s.remove(), 700);
+}
+
+function toggleMenu(){
+  document.getElementById('mobMenu').classList.toggle('open');
+  document.getElementById('ham').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobMenu').classList.remove('open');
+  document.getElementById('ham').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobMenu'), h = document.getElementById('ham');
+  if(m.classList.contains('open') && !m.contains(e.target) && !h.contains(e.target)) closeMenu();
+});
+
+// Stats counter
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    entry.target.querySelectorAll('.stat-n span').forEach(el => {
+      const t = parseFloat(el.textContent); if(isNaN(t)) return;
+      let c = 0; const step = t/45;
+      const tm = setInterval(()=>{ c=Math.min(c+step,t); el.textContent=Number.isInteger(t)?Math.round(c):c.toFixed(1); if(c>=t)clearInterval(tm);}, 25);
+    });
+    obs.unobserve(entry.target);
+  });
+}, {threshold:.5});
+document.querySelectorAll('.stats').forEach(el=>obs.observe(el));
+
+// Service links scroll to contact
+document.querySelectorAll('.svc-link').forEach(a => {
+  a.addEventListener('click', e => { e.preventDefault(); document.querySelector('#contacto').scrollIntoView({behavior:'smooth'}); });
+});
+</script>
+</body>
+</html>
