@@ -24,6 +24,14 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Montserrat',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;}
 
+#parallax-bg{
+  position:fixed;inset:0;z-index:-1;
+  background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=80');
+  background-size:cover;background-position:center;
+  opacity:0.04;
+  will-change:transform;
+}
+
 /* PROGRESS */
 #progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:999;transition:width .1s;box-shadow:0 0 8px rgba(0,180,216,.5);}
 
@@ -304,7 +312,7 @@ footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
 <body>
 
 <div id="progress"></div>
-
+<div id="parallax-bg"></div>
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
@@ -821,6 +829,11 @@ document.querySelectorAll('.stats').forEach(el=>obs.observe(el));
 document.querySelectorAll('.svc-link').forEach(a => {
   a.addEventListener('click', e => { e.preventDefault(); document.querySelector('#contacto').scrollIntoView({behavior:'smooth'}); });
 });
+const pbg = document.getElementById('parallax-bg');
+window.addEventListener('scroll', () => {
+  pbg.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+}, {passive:true});
+  
 </script>
 
   <script src="https://scripts.qubitsuite.com/v1.js"></script>
