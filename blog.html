@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Axentrix</title>
+<meta name="description" content="Blog de Axentrix — Consejos, noticias y guías de tecnología para personas y empresas en Colombia.">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1a2354;--blue:#1a6fd8;--cyan:#00b4d8;
+  --light:#f4f6fb;--white:#ffffff;--gray:#6b7280;
+  --dark:#0d1530;--border:rgba(26,111,216,0.12);
+  --shadow:0 4px 24px rgba(26,35,84,0.10);
+  --shadow-lg:0 12px 48px rgba(26,35,84,0.16);
+  --r:12px;--r-lg:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:999;transition:width .1s;box-shadow:0 0 8px rgba(0,180,216,.5);}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:all .3s;}
+nav.scrolled{box-shadow:var(--shadow);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.logo-wrap{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0;}
+.logo-text{font-size:1.3rem;font-weight:800;letter-spacing:.05em;color:var(--navy);line-height:1;}
+.logo-sub{font-size:.52rem;font-weight:500;letter-spacing:.06em;color:var(--blue);text-transform:uppercase;line-height:1;margin-top:2px;}
+.nav-links{display:flex;gap:1.75rem;list-style:none;align-items:center;}
+.nav-links a{font-size:.82rem;font-weight:500;color:var(--gray);text-decoration:none;letter-spacing:.02em;transition:color .2s;position:relative;padding-bottom:2px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--blue);transition:width .3s;border-radius:2px;}
+.nav-links a:hover{color:var(--navy);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--navy);}
+.nav-links a.active::after{width:100%;}
+.nav-btn{padding:0 1.25rem!important;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.8rem;letter-spacing:.03em;transition:transform .2s,box-shadow .2s!important;white-space:nowrap;display:inline-flex!important;align-items:center!important;justify-content:center;line-height:1;}
+.nav-btn::after{display:none!important;}
+.nav-btn:hover{transform:translateY(-1px)!important;box-shadow:0 6px 20px rgba(26,111,216,.35)!important;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:none;background:transparent;}
+.ham span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;z-index:99;box-shadow:var(--shadow);}
+.mobile-menu.open{display:block;}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.mobile-menu a{font-size:.9rem;font-weight:500;color:var(--navy);text-decoration:none;display:block;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.mobile-menu .mob-btn{margin-top:.75rem;display:block;text-align:center;padding:.75rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.9rem;border-bottom:none!important;}
+
+/* HERO BLOG */
+.blog-hero{
+  background:linear-gradient(135deg,var(--dark) 0%,var(--navy) 55%,#1a3a7a 100%);
+  padding:7rem 1.5rem 4rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.blog-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,216,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.07) 1px,transparent 1px);background-size:50px 50px;}
+.blog-hero::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,216,.15) 0%,transparent 65%);top:-150px;right:-100px;animation:orb 8s ease-in-out infinite;}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,20px) scale(1.05);}}
+.blog-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+.s-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:.75rem;}
+.blog-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--white);letter-spacing:-.02em;line-height:1.1;margin-bottom:1rem;}
+.blog-hero p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.7;}
+
+/* SEARCH */
+.search-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 0;}
+.search-box{
+  display:flex;align-items:center;gap:.75rem;
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:var(--r);padding:.75rem 1.25rem;
+  box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s;
+  max-width:500px;
+}
+.search-box:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,111,216,.1);}
+.search-box svg{flex-shrink:0;color:var(--gray);}
+.search-box input{border:none;outline:none;font-family:'Montserrat',sans-serif;font-size:.875rem;color:var(--navy);width:100%;background:transparent;}
+.search-box input::placeholder{color:var(--gray);}
+
+/* CATEGORIES */
+.categories{max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 0;display:flex;gap:.75rem;flex-wrap:wrap;}
+.cat-btn{
+  padding:.45rem 1rem;border-radius:100px;
+  font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:var(--white);color:var(--gray);
+  transition:all .2s;letter-spacing:.03em;
+}
+.cat-btn:hover{border-color:var(--blue);color:var(--blue);background:rgba(26,111,216,.04);}
+.cat-btn.active{background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border-color:transparent;}
+
+/* MAIN LAYOUT */
+.blog-main{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 5rem;display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;}
+
+/* POSTS GRID */
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+
+/* POST CARD */
+.post-card{
+  background:var(--white);border-radius:var(--r-lg);
+  border:1px solid var(--border);overflow:hidden;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  cursor:pointer;display:flex;flex-direction:column;
+}
+.post-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(26,111,216,.25);}
+
+.post-thumb{
+  width:100%;height:180px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;overflow:hidden;flex-shrink:0;
+}
+.post-thumb::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,216,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.08) 1px,transparent 1px);background-size:30px 30px;}
+.post-thumb.thumb-2{background:linear-gradient(135deg,#0d1530,#1a3a7a);}
+.post-thumb.thumb-3{background:linear-gradient(135deg,#0a2a5e,var(--cyan));}
+.post-thumb.thumb-4{background:linear-gradient(135deg,var(--navy),#0891b2);}
+.post-thumb.thumb-5{background:linear-gradient(135deg,#1a2354,#2563eb);}
+.post-thumb.thumb-6{background:linear-gradient(135deg,#0d1530,#1a6fd8);}
+
+.post-body{padding:1.5rem;display:flex;flex-direction:column;flex:1;}
+.post-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap;}
+.post-cat{
+  font-size:.65rem;font-weight:700;padding:.25rem .65rem;
+  border-radius:100px;letter-spacing:.06em;text-transform:uppercase;
+}
+.cat-blue{background:rgba(26,111,216,.1);color:var(--blue);}
+.cat-cyan{background:rgba(0,180,216,.1);color:#0891b2;}
+.cat-green{background:rgba(52,211,153,.15);color:#059669;}
+.cat-purple{background:rgba(124,58,237,.1);color:#7c3aed;}
+.post-date{font-size:.72rem;color:var(--gray);}
+.post-card h2{font-size:.95rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:.6rem;}
+.post-excerpt{font-size:.82rem;color:var(--gray);line-height:1.65;flex:1;}
+.post-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);}
+.post-author{display:flex;align-items:center;gap:.5rem;}
+.author-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--white);}
+.author-name{font-size:.75rem;font-weight:600;color:var(--navy);}
+.read-time{font-size:.72rem;color:var(--gray);}
+.read-more{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.78rem;font-weight:700;color:var(--blue);
+  text-decoration:none;transition:gap .2s;
+}
+.read-more:hover{gap:.6rem;}
+
+/* FEATURED POST */
+.post-card.featured{grid-column:1/-1;}
+.post-card.featured .post-thumb{height:260px;}
+.post-card.featured h2{font-size:1.2rem;}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:90px;}
+.sidebar-card{background:var(--light);border-radius:var(--r-lg);padding:1.5rem;border:1px solid var(--border);}
+.sidebar-card h3{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);}
+
+/* POPULAR POSTS */
+.popular-item{display:flex;gap:.75rem;align-items:flex-start;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s;}
+.popular-item:last-child{border-bottom:none;padding-bottom:0;}
+.popular-item:hover .popular-title{color:var(--blue);}
+.popular-num{font-size:1.5rem;font-weight:900;color:rgba(26,111,216,.12);line-height:1;flex-shrink:0;font-style:italic;}
+.popular-title{font-size:.8rem;font-weight:600;color:var(--navy);line-height:1.4;transition:color .2s;}
+.popular-date{font-size:.7rem;color:var(--gray);margin-top:.25rem;}
+
+/* NEWSLETTER */
+.newsletter-card{background:linear-gradient(135deg,var(--navy),#1a3a7a);border-radius:var(--r-lg);padding:1.75rem;border:none;}
+.newsletter-card h3{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.5rem;}
+.newsletter-card p{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:1.25rem;}
+.newsletter-input{width:100%;padding:.7rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:var(--white);font-family:'Montserrat',sans-serif;font-size:.8rem;margin-bottom:.75rem;outline:none;transition:border-color .2s;}
+.newsletter-input::placeholder{color:rgba(255,255,255,.4);}
+.newsletter-input:focus{border-color:var(--cyan);}
+.newsletter-btn{width:100%;padding:.7rem;border-radius:var(--r);background:linear-gradient(135deg,var(--blue),var(--cyan));border:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.newsletter-btn:hover{box-shadow:0 4px 16px rgba(0,180,216,.35);transform:translateY(-1px);}
+
+/* TAGS CLOUD */
+.tags-cloud{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tag{padding:.3rem .75rem;border-radius:100px;font-size:.7rem;font-weight:600;background:var(--white);border:1px solid var(--border);color:var(--gray);cursor:pointer;transition:all .2s;}
+.tag:hover{border-color:var(--blue);color:var(--blue);background:rgba(26,111,216,.04);}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--gray);}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:1rem;}
+.empty-state h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;}
+.empty-state p{font-size:.85rem;line-height:1.65;}
+
+/* PAGINATION */
+.pagination{display:flex;gap:.5rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap;}
+.page-btn{width:38px;height:38px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--white);color:var(--gray);font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+.page-btn:hover{border-color:var(--blue);color:var(--blue);}
+.page-btn.active{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.footer-brand .logo-text{color:var(--white);}
+.footer-brand .logo-sub{color:var(--cyan);}
+.footer-brand p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:.9rem;max-width:240px;}
+.footer-col h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.25rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.footer-col a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.3);}
+.footer-bottom a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.footer-bottom a:hover{color:var(--cyan);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .blog-main{grid-template-columns:1fr;}
+  .sidebar{position:static;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .ham{display:flex;}
+  .nav-btn{display:none;}
+  .blog-hero{padding:6rem 1.25rem 3rem;}
+  .blog-main{padding:2rem 1.25rem 4rem;}
+  .posts-grid{grid-template-columns:1fr;}
+  .post-card.featured{grid-column:auto;}
+  .post-card.featured .post-thumb{height:180px;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .footer-brand{grid-column:1/-1;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .categories{padding:1.25rem 1.25rem 0;}
+  .search-wrap{padding:2rem 1.25rem 0;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Axentrix - Inicio">
+      <img src="LOGO_AXENTRIX-SIN FONDO.png" alt="Logo Axentrix" width="42" height="42" style="object-fit:contain;border-radius:6px;">
+      <div>
+        <div class="logo-text">AXENTRIX</div>
+        <div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="index.html#servicios">Servicios</a></li>
+      <li><a href="index.html#por-que">¿Por qué nosotros?</a></li>
+      <li><a href="index.html#precios">Planes</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="index.html#contacto" class="nav-btn">Cotizar ahora →</a></li>
+    </ul>
+    <button class="ham" id="ham" aria-label="Menú" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobMenu">
+  <ul>
+    <li><a href="index.html#productos" onclick="closeMenu()">Productos</a></li>
+    <li><a href="index.html#servicios" onclick="closeMenu()">Servicios</a></li>
+    <li><a href="index.html#por-que" onclick="closeMenu()">¿Por qué nosotros?</a></li>
+    <li><a href="index.html#precios" onclick="closeMenu()">Planes</a></li>
+    <li><a href="blog.html" onclick="closeMenu()">Blog</a></li>
+    <li><a href="index.html#contacto" class="mob-btn" onclick="closeMenu()">Cotizar ahora →</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <span class="s-tag">Blog Axentrix</span>
+    <h1>Tecnología al alcance de todos</h1>
+    <p>Consejos prácticos, guías y noticias de tecnología para que tú y tu empresa tomen mejores decisiones.</p>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap reveal">
+  <div class="search-box">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Buscar artículos..." oninput="filterPosts()">
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories reveal">
+  <button class="cat-btn active" onclick="filterCategory('todos',this)">Todos</button>
+  <button class="cat-btn" onclick="filterCategory('equipos',this)">Equipos</button>
+  <button class="cat-btn" onclick="filterCategory('empresas',this)">Para empresas</button>
+  <button class="cat-btn" onclick="filterCategory('mantenimiento',this)">Mantenimiento</button>
+  <button class="cat-btn" onclick="filterCategory('nube',this)">Nube</button>
+  <button class="cat-btn" onclick="filterCategory('seguridad',this)">Seguridad</button>
+  <button class="cat-btn" onclick="filterCategory('consejos',this)">Consejos</button>
+</div>
+
+<!-- MAIN -->
+<div class="blog-main">
+
+  <!-- POSTS -->
+  <div>
+    <div class="posts-grid" id="postsGrid">
+
+      <!-- POST DESTACADO -->
+      <article class="post-card featured reveal" data-category="equipos">
+        <div class="post-thumb">💻</div>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-cat cat-blue">Equipos</span>
+            <span class="post-date">15 de abril, 2026</span>
+          </div>
+          <h2>¿Laptop o computador de escritorio? Guía definitiva para elegir según tu uso</h2>
+          <p class="post-excerpt">Si estás pensando en comprar un equipo nuevo y no sabes si optar por una laptop o un desktop, esta guía te explica las diferencias clave, ventajas de cada uno y cuál es mejor según tu caso específico — trabajo, estudio o uso diario.</p>
+          <div class="post-footer">
+            <div class="post-author">
+              <div class="author-avatar">AX</div>
+              <span class="author-name">Equipo Axentrix</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <span class="read-time">⏱ 5 min</span>
+              <a href="#" class="read-more">Leer más →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 2 -->
+      <article class="post-card reveal" data-category="mantenimiento" style="transition-delay:.08s">
+        <div class="post-thumb thumb-2">🔧</div>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-cat cat-cyan">Mantenimiento</span>
+            <span class="post-date">10 de abril, 2026</span>
+          </div>
+          <h2>5 señales de que tu computador necesita mantenimiento urgente</h2>
+          <p class="post-excerpt">¿Tu equipo está lento, se calienta mucho o se apaga solo? Descubre las señales de alerta más comunes y qué hacer antes de que sea demasiado tarde.</p>
+          <div class="post-footer">
+            <div class="post-author">
+              <div class="author-avatar">AX</div>
+              <span class="author-name">Equipo Axentrix</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <span class="read-time">⏱ 4 min</span>
+              <a href="#" class="read-more">Leer más →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 3 -->
+      <article class="post-card reveal" data-category="nube" style="transition-delay:.16s">
+        <div class="post-thumb thumb-3">☁️</div>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-cat cat-cyan">Nube</span>
+            <span class="post-date">5 de abril, 2026</span>
+          </div>
+          <h2>Google Workspace vs Microsoft 365: ¿cuál conviene más para tu pyme?</h2>
+          <p class="post-excerpt">Comparamos las dos plataformas más usadas por empresas en Colombia. Precios, herramientas, facilidad de uso y cuál es mejor según el tamaño y tipo de negocio.</p>
+          <div class="post-footer">
+            <div class="post-author">
+              <div class="author-avatar">AX</div>
+              <span class="author-name">Equipo Axentrix</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <span class="read-time">⏱ 6 min</span>
+              <a href="#" class="read-more">Leer más →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 4 -->
+      <article class="post-card reveal" data-category="empresas" style="transition-delay:.24s">
+        <div class="post-thumb thumb-4">👆</div>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-cat cat-blue">Para empresas</span>
+            <span class="post-date">28 de marzo, 2026</span>
+          </div>
+          <h2>Cómo la biometría puede ahorrarle horas de trabajo a tu empresa cada semana</h2>
+          <p class="post-excerpt">El control manual de asistencia es lento, impreciso y genera conflictos. Te explicamos cómo funciona un sistema biométrico y cuánto puede ahorrar una pyme en Colombia.</p>
+          <div class="post-footer">
+            <div class="post-author">
+              <div class="author-avatar">AX</div>
+              <span class="author-name">Equipo Axentrix</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <span class="read-time">⏱ 5 min</span>
+              <a href="#" class="read-more">Leer más →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 5 -->
+      <article class="post-card reveal" data-category="seguridad" style="transition-delay:.32s">
+        <div class="post-thumb thumb-5">🛡️</div>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-cat cat-purple">Seguridad</span>
+            <span class="post-date">20 de marzo, 2026</span>
+          </div>
+          <h2>Ransomware en Colombia: cómo proteger tu negocio sin gastar una fortuna</h2>
+          <p class="post-excerpt">Los ataques de ransomware a pymes en Colombia aumentaron un 60% en el último año. Te damos las medidas básicas de protección que cualquier empresa puede implementar hoy.</p>
+          <div class="post-footer">
+            <div class="post-author">
+              <div class="author-avatar">AX</div>
+              <span class="author-name">Equipo Axentrix</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <span class="read-time">⏱ 7 min</span>
+              <a href="#" class="read-more">Leer más →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 6 -->
+      <article class="post-card reveal" data-category="consejos" style="transition-delay:.4s">
+        <div class="post-thumb thumb-6">📱</div>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-cat cat-green">Consejos</span>
+            <span class="post-date">12 de marzo, 2026</span>
+          </div>
+          <h2>¿Cuándo vale la pena reparar tu celular y cuándo es mejor comprarlo nuevo?</h2>
+          <p class="post-excerpt">La regla general es sencilla pero hay matices importantes. Te explicamos cómo evaluar si la reparación tiene sentido económico o si es momento de cambiar de equipo.</p>
+          <div class="post-footer">
+            <div class="post-author">
+              <div class="author-avatar">AX</div>
+              <span class="author-name">Equipo Axentrix</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <span class="read-time">⏱ 4 min</span>
+              <a href="#" class="read-more">Leer más →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-icon">🔍</div>
+      <h3>No encontramos artículos</h3>
+      <p>Intenta con otra búsqueda o selecciona una categoría diferente.</p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">→</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Popular -->
+    <div class="sidebar-card reveal">
+      <h3>📌 Artículos populares</h3>
+      <div class="popular-item">
+        <span class="popular-num">01</span>
+        <div><div class="popular-title">¿Laptop o escritorio? Guía para elegir</div><div class="popular-date">15 abr 2026</div></div>
+      </div>
+      <div class="popular-item">
+        <span class="popular-num">02</span>
+        <div><div class="popular-title">Google Workspace vs Microsoft 365</div><div class="popular-date">5 abr 2026</div></div>
+      </div>
+      <div class="popular-item">
+        <span class="popular-num">03</span>
+        <div><div class="popular-title">Ransomware: cómo proteger tu negocio</div><div class="popular-date">20 mar 2026</div></div>
+      </div>
+      <div class="popular-item">
+        <span class="popular-num">04</span>
+        <div><div class="popular-title">5 señales de mantenimiento urgente</div><div class="popular-date">10 abr 2026</div></div>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-card reveal" style="transition-delay:.1s">
+      <h3>📬 Recibe nuestros artículos</h3>
+      <p>Consejos de tecnología directo a tu correo, sin spam.</p>
+      <input type="email" class="newsletter-input" placeholder="tu@correo.com">
+      <button class="newsletter-btn">Suscribirme gratis</button>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-card reveal" style="transition-delay:.2s">
+      <h3>🏷️ Temas</h3>
+      <div class="tags-cloud">
+        <span class="tag" onclick="filterCategory('equipos',null)">Laptops</span>
+        <span class="tag" onclick="filterCategory('equipos',null)">Celulares</span>
+        <span class="tag" onclick="filterCategory('mantenimiento',null)">Reparación</span>
+        <span class="tag" onclick="filterCategory('nube',null)">Office 365</span>
+        <span class="tag" onclick="filterCategory('nube',null)">Google Workspace</span>
+        <span class="tag" onclick="filterCategory('empresas',null)">Pymes</span>
+        <span class="tag" onclick="filterCategory('seguridad',null)">Ciberseguridad</span>
+        <span class="tag" onclick="filterCategory('consejos',null)">Tips</span>
+        <span class="tag" onclick="filterCategory('empresas',null)">Biometría</span>
+        <span class="tag" onclick="filterCategory('equipos',null)">Impresoras</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:var(--r-lg);padding:1.75rem;text-align:center;" class="reveal" style="transition-delay:.3s">
+      <div style="font-size:2rem;margin-bottom:.75rem;">💬</div>
+      <h3 style="font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.5rem;">¿Tienes una pregunta?</h3>
+      <p style="font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:1.25rem;">Escríbenos por WhatsApp y te respondemos en minutos.</p>
+      <a href="https://wa.me/573239646992" target="_blank" rel="noopener" style="display:block;padding:.7rem;background:var(--white);color:var(--blue);border-radius:var(--r);font-size:.82rem;font-weight:700;text-decoration:none;transition:all .2s;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">Escribir por WhatsApp</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo-wrap">
+          <img src="LOGO_AXENTRIX-SIN FONDO.png" alt="Logo Axentrix" width="34" height="34" style="object-fit:contain;border-radius:6px;">
+          <div><div class="logo-text">AXENTRIX</div><div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div></div>
+        </a>
+        <p>Tu aliado tecnológico de confianza. Equipos, soluciones y soporte para personas, micro y pequeñas empresas.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="index.html#productos">Computadores</a></li>
+          <li><a href="index.html#productos">Celulares</a></li>
+          <li><a href="index.html#productos">Tablets</a></li>
+          <li><a href="index.html#productos">Impresoras</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="index.html#servicios">Mantenimiento</a></li>
+          <li><a href="index.html#servicios">Biometría</a></li>
+          <li><a href="index.html#servicios">Office 365 / G.Workspace</a></li>
+          <li><a href="index.html#servicios">Infraestructura IT</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="index.html#por-que">¿Por qué Axentrix?</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="https://wa.me/573239646992" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Axentrix. Todos los derechos reservados.</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
+        <a href="#">Privacidad</a><a href="#">Términos</a><a href="#">www.axentrix.co</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Progress
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  revealAll();
+});
+
+function revealAll(){
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible');
+  });
+}
+setTimeout(revealAll, 120);
+
+// Mobile menu
+function toggleMenu(){
+  document.getElementById('mobMenu').classList.toggle('open');
+  document.getElementById('ham').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobMenu').classList.remove('open');
+  document.getElementById('ham').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobMenu'), h = document.getElementById('ham');
+  if(m.classList.contains('open') && !m.contains(e.target) && !h.contains(e.target)) closeMenu();
+});
+
+// Filter by category
+let currentCategory = 'todos';
+function filterCategory(cat, btn){
+  currentCategory = cat;
+  if(btn){
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  filterPosts();
+}
+
+// Search + category filter
+function filterPosts(){
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const posts = document.querySelectorAll('.post-card');
+  let visible = 0;
+  posts.forEach(post => {
+    const text = post.innerText.toLowerCase();
+    const cat = post.dataset.category;
+    const matchCat = currentCategory === 'todos' || cat === currentCategory;
+    const matchSearch = query === '' || text.includes(query);
+    if(matchCat && matchSearch){
+      post.style.display = '';
+      visible++;
+    } else {
+      post.style.display = 'none';
+    }
+  });
+  document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+  document.getElementById('pagination').style.display = visible === 0 ? 'none' : 'flex';
+}
+
+// Pagination buttons
+document.querySelectorAll('.page-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
