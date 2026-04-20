@@ -50,6 +50,66 @@ nav.scrolled{box-shadow:var(--shadow);}
 .mobile-menu a{font-size:.9rem;font-weight:500;color:var(--navy);text-decoration:none;display:block;padding:.5rem 0;border-bottom:1px solid var(--border);}
 .mobile-menu .mob-btn{margin-top:.75rem;display:block;text-align:center;padding:.75rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.9rem;border-bottom:none!important;}
 
+/* DROPDOWN */
+.nav-item{position:relative;}
+.dropdown{
+  position:absolute;top:calc(100% + 12px);left:50%;
+  transform:translateX(-50%);
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-lg);
+  min-width:240px;padding:.6rem;
+  opacity:0;visibility:hidden;
+  transform:translateX(-50%) translateY(-8px);
+  transition:all .25s cubic-bezier(.16,1,.3,1);
+  z-index:200;
+}
+.nav-item:hover .dropdown{
+  opacity:1;visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+/* flecha arriba */
+.dropdown::before{
+  content:'';position:absolute;
+  top:-6px;left:50%;transform:translateX(-50%);
+  width:12px;height:12px;
+  background:var(--white);
+  border-left:1px solid var(--border);
+  border-top:1px solid var(--border);
+  transform:translateX(-50%) rotate(45deg);
+}
+.dropdown a{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.65rem .9rem;border-radius:var(--r);
+  font-size:.8rem;font-weight:500;color:var(--gray);
+  text-decoration:none;transition:all .2s;
+}
+.dropdown a:hover{background:var(--light);color:var(--navy);}
+.dropdown a .dd-icon{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;
+  background:linear-gradient(135deg,rgba(26,111,216,.1),rgba(0,180,216,.08));
+}
+.dropdown a .dd-text{}
+.dropdown a .dd-label{display:block;font-weight:600;color:var(--navy);font-size:.8rem;}
+.dropdown a .dd-sub{display:block;font-size:.7rem;color:var(--gray);margin-top:1px;}
+.dropdown-divider{height:1px;background:var(--border);margin:.4rem .6rem;}
+.dd-header{
+  padding:.5rem .9rem .3rem;
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--blue);
+}
+/* chevron en el link que tiene dropdown */
+.has-dropdown > a::after{display:none!important;}
+.has-dropdown > a .chevron{
+  display:inline-block;margin-left:.3rem;
+  font-size:.6rem;transition:transform .25s;
+  vertical-align:middle;
+}
+.has-dropdown:hover > a .chevron{transform:rotate(180deg);}
+  
 /* HERO BLOG */
 .blog-hero{
   background:linear-gradient(135deg,var(--dark) 0%,var(--navy) 55%,#1a3a7a 100%);
@@ -246,14 +306,109 @@ footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
         <div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div>
       </div>
     </a>
-    <ul class="nav-links">
-      <li><a href="index.html#productos">Productos</a></li>
-      <li><a href="index.html#servicios">Servicios</a></li>
-      <li><a href="index.html#por-que">¿Por qué nosotros?</a></li>
-      <li><a href="index.html#precios">Planes</a></li>
-      <li><a href="blog.html" class="active">Blog</a></li>
-      <li><a href="index.html#contacto" class="nav-btn">Cotizar ahora →</a></li>
-    </ul>
+<ul class="nav-links">
+  <li><a href="index.html#productos">Productos</a></li>
+
+  <!-- SERVICIOS CON DROPDOWN -->
+  <li class="nav-item has-dropdown">
+    <a href="index.html#servicios">Servicios <span class="chevron">▼</span></a>
+    <div class="dropdown">
+      <div class="dd-header">Servicios técnicos</div>
+      <a href="index.html#servicios">
+        <span class="dd-icon">🔧</span>
+        <span class="dd-text">
+          <span class="dd-label">Mantenimiento y Reparación</span>
+          <span class="dd-sub">Computadores, celulares, tablets</span>
+        </span>
+      </a>
+      <a href="index.html#servicios">
+        <span class="dd-icon">👆</span>
+        <span class="dd-text">
+          <span class="dd-label">Biometría y Control de Acceso</span>
+          <span class="dd-sub">Huella digital, facial, RFID</span>
+        </span>
+      </a>
+      <div class="dropdown-divider"></div>
+      <div class="dd-header">Soluciones empresariales</div>
+      <a href="index.html#servicios">
+        <span class="dd-icon">☁️</span>
+        <span class="dd-text">
+          <span class="dd-label">Migración a la Nube</span>
+          <span class="dd-sub">Office 365 · Google Workspace</span>
+        </span>
+      </a>
+      <a href="index.html#servicios">
+        <span class="dd-icon">🌐</span>
+        <span class="dd-text">
+          <span class="dd-label">Infraestructura Tecnológica</span>
+          <span class="dd-sub">Redes, servidores, VPN</span>
+        </span>
+      </a>
+      <a href="index.html#servicios">
+        <span class="dd-icon">🛡️</span>
+        <span class="dd-text">
+          <span class="dd-label">Ciberseguridad</span>
+          <span class="dd-sub">Protección para pymes</span>
+        </span>
+      </a>
+      <a href="index.html#servicios">
+        <span class="dd-icon">🎓</span>
+        <span class="dd-text">
+          <span class="dd-label">Capacitación</span>
+          <span class="dd-sub">Formación y acompañamiento</span>
+        </span>
+      </a>
+    </div>
+  </li>
+
+  <!-- PRODUCTOS CON DROPDOWN -->
+  <li class="nav-item has-dropdown">
+    <a href="index.html#productos">Equipos <span class="chevron">▼</span></a>
+    <div class="dropdown">
+      <div class="dd-header">Dispositivos</div>
+      <a href="index.html#productos">
+        <span class="dd-icon">💻</span>
+        <span class="dd-text">
+          <span class="dd-label">Computadores y Laptops</span>
+          <span class="dd-sub">HP, Lenovo, Dell, Apple</span>
+        </span>
+      </a>
+      <a href="index.html#productos">
+        <span class="dd-icon">📱</span>
+        <span class="dd-text">
+          <span class="dd-label">Celulares y Smartphones</span>
+          <span class="dd-sub">Samsung, iPhone, Motorola</span>
+        </span>
+      </a>
+      <a href="index.html#productos">
+        <span class="dd-icon">📟</span>
+        <span class="dd-text">
+          <span class="dd-label">Tablets</span>
+          <span class="dd-sub">iPad, Galaxy Tab, Lenovo</span>
+        </span>
+      </a>
+      <a href="index.html#productos">
+        <span class="dd-icon">🖨️</span>
+        <span class="dd-text">
+          <span class="dd-label">Impresoras</span>
+          <span class="dd-sub">Tinta, láser, multifuncional</span>
+        </span>
+      </a>
+      <a href="index.html#productos">
+        <span class="dd-icon">🔌</span>
+        <span class="dd-text">
+          <span class="dd-label">Redes y Accesorios</span>
+          <span class="dd-sub">Routers, switches, periféricos</span>
+        </span>
+      </a>
+    </div>
+  </li>
+
+  <li><a href="index.html#por-que">¿Por qué nosotros?</a></li>
+  <li><a href="index.html#precios">Planes</a></li>
+  <li><a href="blog.html">Blog</a></li>
+  <li><a href="index.html#contacto" class="nav-btn">Cotizar ahora →</a></li>
+</ul>
     <button class="ham" id="ham" aria-label="Menú" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -638,6 +793,15 @@ document.querySelectorAll('.page-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+  });
+});
+  // Cerrar dropdown al hacer clic en un link dentro de él
+document.querySelectorAll('.dropdown a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown').forEach(d => {
+      d.style.opacity = '0';
+      d.style.visibility = 'hidden';
+    });
   });
 });
 </script>
