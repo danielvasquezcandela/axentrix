@@ -169,6 +169,14 @@ nav.scrolled{box-shadow:var(--shadow);}
   cursor:pointer;display:flex;flex-direction:column;
 }
 .post-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(26,111,216,.25);}
+  /* LINKS EN TARJETAS */
+.post-card{position:relative;}
+.post-card .card-link{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+.post-card .read-more{position:relative;z-index:2;}
 
 .post-thumb{
   width:100%;height:180px;
@@ -495,8 +503,8 @@ footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
       </a>
 
       <!-- POST 2 -->
-      <a href="post-senales-mantenimiento.html" style="text-decoration:none;color:inherit;display:block;">
       <article class="post-card reveal" data-category="mantenimiento" style="transition-delay:.08s">
+        <a href="post-senales-mantenimiento.html" class="card-link" aria-label="Leer artículo completo"></a>
         <div class="post-thumb thumb-2">🔧</div>
         <div class="post-body">
           <div class="post-meta">
@@ -517,8 +525,7 @@ footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
           </div>
         </div>
       </article>
-      </a>
-
+      
       <!-- POST 3 -->
       <article class="post-card reveal" data-category="nube" style="transition-delay:.16s">
         <div class="post-thumb thumb-3">☁️</div>
