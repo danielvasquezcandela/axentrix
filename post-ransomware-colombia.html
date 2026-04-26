@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="LOGO_AXENTRIX-SIN FONDO.png">
+<title>Ransomware en Colombia: Cómo Proteger tu Negocio sin Gastar una Fortuna — Axentrix</title>
+<meta name="description" content="Los ataques de ransomware a pymes en Colombia aumentaron un 60% en el último año. Descubre las medidas prácticas y económicas para proteger tu empresa hoy mismo.">
+<meta name="keywords" content="ransomware Colombia pymes, ciberseguridad empresas Colombia, proteger negocio ransomware, seguridad informática Bogotá, backup empresas Colombia, antivirus pymes Colombia">
+<meta property="og:title" content="Ransomware en Colombia: Cómo Proteger tu Negocio sin Gastar una Fortuna — Axentrix">
+<meta property="og:description" content="Guía práctica de ciberseguridad para pymes colombianas: qué es el ransomware, cómo entra y qué puedes hacer hoy para protegerte sin necesitar un gran presupuesto.">
+<meta property="og:url" content="https://axentrix.co/post-ransomware-colombia.html">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://axentrix.co/post-ransomware-colombia.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Ransomware en Colombia: Cómo Proteger tu Negocio sin Gastar una Fortuna","description":"Guía práctica de ciberseguridad para pymes colombianas. Medidas concretas y económicas para protegerse del ransomware sin necesitar un gran presupuesto de TI.","author":{"@type":"Organization","name":"Axentrix"},"publisher":{"@type":"Organization","name":"Axentrix","url":"https://axentrix.co"},"datePublished":"2026-03-20","dateModified":"2026-03-20","url":"https://axentrix.co/post-ransomware-colombia.html"}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1a2354;--blue:#1a6fd8;--cyan:#00b4d8;--light:#f4f6fb;--white:#ffffff;--gray:#6b7280;--dark:#0d1530;--border:rgba(26,111,216,0.12);--shadow:0 4px 24px rgba(26,35,84,0.10);--shadow-lg:0 12px 48px rgba(26,35,84,0.16);--r:12px;--r-lg:20px;--red:#dc2626;--orange:#d97706;--green:#059669;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;}
+#progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:999;transition:width .1s;box-shadow:0 0 8px rgba(0,180,216,.5);}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:all .3s;}
+nav.scrolled{box-shadow:var(--shadow);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.logo-wrap{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0;}
+.logo-text{font-size:1.3rem;font-weight:800;letter-spacing:.05em;color:var(--navy);line-height:1;}
+.logo-sub{font-size:.52rem;font-weight:500;letter-spacing:.06em;color:var(--blue);text-transform:uppercase;line-height:1;margin-top:2px;}
+.nav-links{display:flex;gap:1.75rem;list-style:none;align-items:center;}
+.nav-links a{font-size:.82rem;font-weight:500;color:var(--gray);text-decoration:none;letter-spacing:.02em;transition:color .2s;position:relative;padding-bottom:2px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--blue);transition:width .3s;border-radius:2px;}
+.nav-links a:hover{color:var(--navy);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--navy);}
+.nav-links a.active::after{width:100%;}
+.nav-btn{padding:0 1.25rem!important;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.8rem;letter-spacing:.03em;transition:transform .2s,box-shadow .2s!important;white-space:nowrap;display:inline-flex!important;align-items:center!important;justify-content:center;line-height:1;}
+.nav-btn::after{display:none!important;}
+.nav-btn:hover{transform:translateY(-1px)!important;box-shadow:0 6px 20px rgba(26,111,216,.35)!important;}
+.nav-item{position:relative;}
+.dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-8px);background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);min-width:240px;padding:.6rem;opacity:0;visibility:hidden;transition:all .25s cubic-bezier(.16,1,.3,1);z-index:200;}
+.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.dropdown::before{content:'';position:absolute;top:-6px;left:50%;width:12px;height:12px;background:var(--white);border-left:1px solid var(--border);border-top:1px solid var(--border);transform:translateX(-50%) rotate(45deg);}
+.dropdown a{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;border-radius:var(--r);font-size:.8rem;font-weight:500;color:var(--gray);text-decoration:none;transition:all .2s;}
+.dropdown a:hover{background:var(--light);color:var(--navy);}
+.dropdown a::after{display:none!important;}
+.dd-icon{width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;background:linear-gradient(135deg,rgba(26,111,216,.1),rgba(0,180,216,.08));}
+.dd-label{display:block;font-weight:600;color:var(--navy);font-size:.8rem;}
+.dd-sub{display:block;font-size:.7rem;color:var(--gray);margin-top:1px;}
+.dropdown-divider{height:1px;background:var(--border);margin:.4rem .6rem;}
+.dd-header{padding:.5rem .9rem .3rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);}
+.has-dropdown>a::after{display:none!important;}
+.has-dropdown>a .chevron{display:inline-block;margin-left:.3rem;font-size:.6rem;transition:transform .25s;vertical-align:middle;}
+.has-dropdown:hover>a .chevron{transform:rotate(180deg);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:none;background:transparent;}
+.ham span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;z-index:99;box-shadow:var(--shadow);max-height:calc(100vh - 68px);overflow-y:auto;}
+.mobile-menu.open{display:block;}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.mobile-menu a{font-size:.9rem;font-weight:500;color:var(--navy);text-decoration:none;display:block;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.mobile-menu .mob-btn{margin-top:.75rem;display:block;text-align:center;padding:.75rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white)!important;border-radius:var(--r);font-weight:700;font-size:.9rem;border-bottom:none!important;}
+
+/* HERO */
+.post-hero{background:linear-gradient(135deg,#1a0a0a 0%,#3d0f0f 40%,#1a2354 100%);padding:7rem 1.5rem 4rem;position:relative;overflow:hidden;}
+.post-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(220,38,38,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(220,38,38,.05) 1px,transparent 1px);background-size:50px 50px;}
+.post-hero::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(220,38,38,.12) 0%,transparent 65%);top:-150px;right:-100px;}
+.post-hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.breadcrumb a{font-size:.75rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:#fca5a5;}
+.breadcrumb span{font-size:.75rem;color:rgba(255,255,255,.3);}
+.post-cat-badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.3rem .8rem;border-radius:100px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;}
+.cat-red{background:rgba(220,38,38,.2);color:#fca5a5;}
+.post-hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:800;color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:1.25rem;}
+.post-meta-bar{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:rgba(255,255,255,.55);}
+.meta-item strong{color:rgba(255,255,255,.8);font-weight:600;}
+
+/* ARTICLE */
+.article-wrap{max-width:1200px;margin:0 auto;padding:3.5rem 1.5rem 5rem;display:grid;grid-template-columns:1fr 300px;gap:3.5rem;align-items:start;}
+.article-content{max-width:720px;}
+.article-intro{font-size:1.05rem;color:var(--gray);line-height:1.8;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);font-weight:400;}
+.article-content h2{font-size:1.35rem;font-weight:800;color:var(--navy);margin:2.5rem 0 1rem;letter-spacing:-.02em;line-height:1.2;}
+.article-content h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin:1.75rem 0 .75rem;}
+.article-content p{font-size:.92rem;color:#374151;line-height:1.85;margin-bottom:1.25rem;font-weight:400;}
+.article-content ul,.article-content ol{padding-left:1.5rem;margin-bottom:1.25rem;}
+.article-content li{font-size:.92rem;color:#374151;line-height:1.75;margin-bottom:.5rem;}
+.article-content strong{color:var(--navy);font-weight:700;}
+
+/* ALERTA ROJA */
+.alerta-roja{background:linear-gradient(135deg,rgba(220,38,38,.06),rgba(239,68,68,.03));border:1.5px solid rgba(220,38,38,.2);border-left:4px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:1.5rem;margin:2rem 0;}
+.alerta-roja .alerta-title{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;}
+.alerta-roja p{margin-bottom:0;font-size:.9rem;color:#7f1d1d;font-weight:500;line-height:1.65;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:2rem 0;}
+.stat-box{border-radius:var(--r);padding:1.5rem 1rem;text-align:center;}
+.stat-box.red{background:linear-gradient(135deg,#7f1d1d,#991b1b);}
+.stat-box.navy{background:linear-gradient(135deg,var(--navy),#1a3a7a);}
+.stat-box .stat-num{font-size:1.9rem;font-weight:800;line-height:1;margin-bottom:.35rem;}
+.stat-box.red .stat-num{color:#fca5a5;}
+.stat-box.navy .stat-num{color:var(--cyan);}
+.stat-box .stat-desc{font-size:.7rem;color:rgba(255,255,255,.65);line-height:1.4;}
+
+/* COMO ENTRA */
+.entrada-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;}
+.entrada-card{border-radius:var(--r);border:1.5px solid var(--border);padding:1.25rem;text-align:center;transition:all .25s;cursor:default;}
+.entrada-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(220,38,38,.2);}
+.entrada-emoji{font-size:1.75rem;margin-bottom:.6rem;}
+.entrada-title{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;}
+.entrada-pct{font-size:1.1rem;font-weight:800;color:var(--red);margin-bottom:.3rem;}
+.entrada-desc{font-size:.75rem;color:var(--gray);line-height:1.5;}
+
+/* MEDIDAS */
+.medida-list{display:flex;flex-direction:column;gap:1.25rem;margin:1.5rem 0;}
+.medida-card{display:flex;gap:1.25rem;align-items:flex-start;padding:1.5rem;border-radius:var(--r-lg);border:1px solid var(--border);transition:all .25s;cursor:default;}
+.medida-card:hover{background:var(--light);border-color:rgba(26,111,216,.2);transform:translateX(3px);}
+.medida-icon-wrap{flex-shrink:0;}
+.medida-num{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:800;color:var(--white);}
+.medida-num.gratis{background:linear-gradient(135deg,var(--green),#10b981);}
+.medida-num.bajo{background:linear-gradient(135deg,var(--blue),var(--cyan));}
+.medida-num.medio{background:linear-gradient(135deg,var(--orange),#f59e0b);}
+.medida-info{}
+.medida-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.25rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.costo-tag{font-size:.62rem;font-weight:700;padding:.2rem .6rem;border-radius:100px;white-space:nowrap;}
+.costo-gratis{background:rgba(5,150,105,.1);color:var(--green);}
+.costo-bajo{background:rgba(26,111,216,.1);color:var(--blue);}
+.costo-medio{background:rgba(217,119,6,.1);color:var(--orange);}
+.medida-desc{font-size:.84rem;color:var(--gray);line-height:1.7;margin-bottom:.5rem;}
+.medida-como{font-size:.78rem;color:var(--navy);font-weight:600;background:var(--light);border-radius:6px;padding:.4rem .75rem;display:inline-block;}
+
+/* ESCENARIO */
+.escenario{background:linear-gradient(135deg,#1a0a0a,#3d0f0f);border-radius:var(--r-lg);padding:2rem;margin:2rem 0;position:relative;overflow:hidden;border:1px solid rgba(220,38,38,.2);}
+.escenario::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(220,38,38,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(220,38,38,.04) 1px,transparent 1px);background-size:40px 40px;}
+.esc-inner{position:relative;z-index:1;}
+.esc-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fca5a5;margin-bottom:.5rem;}
+.esc-title{font-size:1rem;font-weight:800;color:var(--white);margin-bottom:.75rem;}
+.esc-p{font-size:.84rem;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:.75rem;}
+.esc-p:last-child{margin-bottom:0;}
+.esc-highlight{color:#fca5a5;font-weight:700;}
+
+/* PLAN ACCION */
+.plan-steps{display:flex;flex-direction:column;gap:.75rem;margin:1.5rem 0;}
+.plan-step{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.25rem;border-radius:var(--r);background:var(--light);border:1px solid var(--border);transition:all .2s;}
+.plan-step:hover{border-color:rgba(26,111,216,.2);background:rgba(26,111,216,.03);}
+.plan-step-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--white);flex-shrink:0;margin-top:1px;}
+.plan-step-info h4{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;}
+.plan-step-info p{font-size:.78rem;color:var(--gray);line-height:1.55;margin:0;}
+.plan-step-info .tiempo{font-size:.68rem;font-weight:600;color:var(--blue);margin-top:.3rem;display:block;}
+
+/* CAJAS */
+.highlight-box{background:linear-gradient(135deg,rgba(26,111,216,.06),rgba(0,180,216,.04));border:1px solid rgba(26,111,216,.15);border-left:4px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:1.25rem 1.5rem;margin:2rem 0;}
+.highlight-box p{margin-bottom:0;color:var(--navy);font-weight:500;}
+.tip-box{background:rgba(0,180,216,.06);border:1px solid rgba(0,180,216,.2);border-radius:var(--r);padding:1.25rem 1.5rem;margin:2rem 0;display:flex;gap:1rem;align-items:flex-start;}
+.tip-icon{font-size:1.25rem;flex-shrink:0;margin-top:.1rem;}
+.tip-box p{margin-bottom:0;font-size:.88rem;color:var(--navy);}
+.success-box{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.25);border-radius:var(--r);padding:1.25rem 1.5rem;margin:2rem 0;display:flex;gap:1rem;align-items:flex-start;}
+.success-box p{margin-bottom:0;font-size:.88rem;color:#065f46;}
+
+/* CTA */
+.cta-inline{background:linear-gradient(135deg,var(--navy),#1a3a7a);border-radius:var(--r-lg);padding:2rem;text-align:center;margin:2.5rem 0;position:relative;overflow:hidden;}
+.cta-inline::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.06) 1px,transparent 1px);background-size:40px 40px;}
+.cta-inline-inner{position:relative;z-index:1;}
+.cta-inline h3{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.5rem;}
+.cta-inline p{font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:1.25rem;line-height:1.6;}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border-radius:var(--r);font-size:.85rem;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s;}
+.cta-btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,180,216,.4);}
+.cta-btn-secondary{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.25rem;background:transparent;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);border-radius:var(--r);font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s;}
+.cta-btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* SHARE */
+.share-bar{display:flex;align-items:center;gap:1rem;padding:1.5rem 0;margin-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.share-bar span{font-size:.82rem;font-weight:700;color:var(--navy);}
+.share-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:100px;font-size:.75rem;font-weight:700;border:1.5px solid var(--border);color:var(--gray);background:var(--white);cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;}
+.share-btn:hover{border-color:var(--blue);color:var(--blue);}
+
+/* RELATED */
+.related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);}
+.related h2{font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:1.5rem;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;}
+.related-card{background:var(--light);border-radius:var(--r);border:1px solid var(--border);padding:1.25rem;text-decoration:none;transition:all .2s;display:flex;flex-direction:column;gap:.5rem;}
+.related-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(26,111,216,.2);}
+.related-emoji{font-size:1.5rem;}
+.related-title{font-size:.82rem;font-weight:700;color:var(--navy);line-height:1.4;}
+.related-date{font-size:.7rem;color:var(--gray);}
+
+/* SIDEBAR */
+.post-sidebar{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:90px;}
+.sidebar-card{background:var(--light);border-radius:var(--r-lg);padding:1.5rem;border:1px solid var(--border);}
+.sidebar-card h3{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+.toc-list a{font-size:.78rem;color:var(--gray);text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border-radius:6px;transition:all .2s;}
+.toc-list a:hover{color:var(--blue);background:rgba(26,111,216,.05);}
+.toc-list a.active-toc{color:var(--blue);font-weight:600;background:rgba(26,111,216,.07);}
+.toc-list a::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:4rem 1.5rem 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.footer-brand .logo-text{color:var(--white);}
+.footer-brand .logo-sub{color:var(--cyan);}
+.footer-brand p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:.9rem;max-width:240px;}
+.footer-col h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.25rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.footer-col a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.3);}
+.footer-bottom a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.footer-bottom a:hover{color:var(--cyan);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:1024px){.article-wrap{grid-template-columns:1fr;}.post-sidebar{position:static;}.footer-top{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:600px){.nav-links{display:none;}.ham{display:flex;}.nav-btn{display:none;}.post-hero{padding:6rem 1.25rem 3rem;}.article-wrap{padding:2rem 1.25rem 4rem;gap:2rem;}.stats-row{grid-template-columns:repeat(2,1fr);}.entrada-grid{grid-template-columns:1fr 1fr;}.related-grid{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr 1fr;}.footer-brand{grid-column:1/-1;}.footer-bottom{flex-direction:column;text-align:center;}.cta-btns{flex-direction:column;align-items:center;}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Axentrix">
+      <img src="LOGO_AXENTRIX-SIN FONDO.png" alt="Logo Axentrix" width="42" height="42" style="object-fit:contain;border-radius:6px;">
+      <div><div class="logo-text">AXENTRIX</div><div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item has-dropdown">
+        <a href="index.html#productos">Productos <span class="chevron">▼</span></a>
+        <div class="dropdown">
+          <div class="dd-header">Dispositivos</div>
+          <a href="index.html#productos"><span class="dd-icon">💻</span><span><span class="dd-label">Computadores y Laptops</span><span class="dd-sub">HP, Lenovo, Dell, Apple</span></span></a>
+          <a href="index.html#productos"><span class="dd-icon">🛠️</span><span><span class="dd-label">Arma tu Equipo</span><span class="dd-sub">Gamer · Productividad · a tu medida</span></span></a>
+          <a href="index.html#productos"><span class="dd-icon">📱</span><span><span class="dd-label">Celulares y Smartphones</span><span class="dd-sub">Samsung, iPhone, Motorola</span></span></a>
+          <a href="index.html#productos"><span class="dd-icon">📟</span><span><span class="dd-label">Tablets</span><span class="dd-sub">iPad, Galaxy Tab, Lenovo</span></span></a>
+          <a href="index.html#productos"><span class="dd-icon">🖨️</span><span><span class="dd-label">Impresoras</span><span class="dd-sub">Tinta, láser, multifuncional</span></span></a>
+          <a href="index.html#productos"><span class="dd-icon">🔌</span><span><span class="dd-label">Redes y Accesorios</span><span class="dd-sub">Routers, switches, periféricos</span></span></a>
+          <a href="index.html#productos"><span class="dd-icon">⚙️</span><span><span class="dd-label">Partes y Repuestos</span><span class="dd-sub">Pantallas, CPU, RAM</span></span></a>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="index.html#servicios">Servicios <span class="chevron">▼</span></a>
+        <div class="dropdown">
+          <div class="dd-header">Servicios técnicos</div>
+          <a href="index.html#servicios"><span class="dd-icon">🔧</span><span><span class="dd-label">Mantenimiento y Reparación</span><span class="dd-sub">Computadores, celulares, tablets</span></span></a>
+          <a href="index.html#servicios"><span class="dd-icon">💻</span><span><span class="dd-label">Asesoría</span><span class="dd-sub">Compra inteligente de equipos</span></span></a>
+          <div class="dropdown-divider"></div>
+          <div class="dd-header">Soluciones empresariales</div>
+          <a href="index.html#servicios"><span class="dd-icon">👆</span><span><span class="dd-label">Biometría</span><span class="dd-sub">Tiempo, asistencia y acceso</span></span></a>
+          <a href="index.html#servicios"><span class="dd-icon">☁️</span><span><span class="dd-label">Migración a la Nube</span><span class="dd-sub">Office 365 · Google Workspace</span></span></a>
+          <a href="index.html#servicios"><span class="dd-icon">🌐</span><span><span class="dd-label">Infraestructura Tecnológica</span><span class="dd-sub">Redes, servidores, VPN</span></span></a>
+          <a href="index.html#servicios"><span class="dd-icon">🛡️</span><span><span class="dd-label">Ciberseguridad</span><span class="dd-sub">Protección para empresas</span></span></a>
+          <a href="index.html#servicios"><span class="dd-icon">🎞️</span><span><span class="dd-label">CCTV</span><span class="dd-sub">Seguridad inteligente 24/7</span></span></a>
+          <a href="index.html#servicios"><span class="dd-icon">🎓</span><span><span class="dd-label">Capacitación</span><span class="dd-sub">Formación y acompañamiento</span></span></a>
+        </div>
+      </li>
+      <li><a href="index.html#por-que">¿Por qué nosotros?</a></li>
+      <li><a href="index.html#precios">Planes</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="index.html#contacto" class="nav-btn">Cotizar ahora →</a></li>
+    </ul>
+    <button class="ham" id="ham" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobMenu">
+  <ul>
+    <li><a href="index.html#productos" onclick="closeMenu()">Productos</a></li>
+    <li><a href="index.html#servicios" onclick="closeMenu()">Servicios</a></li>
+    <li><a href="index.html#por-que" onclick="closeMenu()">¿Por qué nosotros?</a></li>
+    <li><a href="index.html#precios" onclick="closeMenu()">Planes</a></li>
+    <li><a href="blog.html" onclick="closeMenu()">Blog</a></li>
+    <li><a href="index.html#contacto" class="mob-btn" onclick="closeMenu()">Cotizar ahora →</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<div class="post-hero">
+  <div class="post-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a><span>/</span>
+      <a href="blog.html">Blog</a><span>/</span>
+      <span style="color:rgba(255,255,255,.6)">Ransomware Colombia</span>
+    </div>
+    <span class="post-cat-badge cat-red">Seguridad</span>
+    <h1>Ransomware en Colombia: cómo proteger tu negocio sin gastar una fortuna</h1>
+    <div class="post-meta-bar">
+      <span class="meta-item">👤 <strong>Equipo Axentrix</strong></span>
+      <span class="meta-item">📅 <strong>20 de marzo, 2026</strong></span>
+      <span class="meta-item">⏱ <strong>8 min de lectura</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTÍCULO -->
+<div class="article-wrap">
+  <article class="article-content reveal">
+
+    <p class="article-intro">Colombia se ha convertido en uno de los países más atacados por ransomware en América Latina. Y el blanco favorito ya no son las grandes corporaciones — son las pymes y microempresas que, precisamente por no tener un equipo de TI dedicado, son más vulnerables. La buena noticia es que protegerse no requiere un presupuesto enorme. Requiere conocimiento y acción.</p>
+
+    <div class="alerta-roja">
+      <div class="alerta-title">⚠️ Situación actual en Colombia</div>
+      <p>Los ataques de ransomware a empresas en Colombia aumentaron más del 60% en el último año. El 70% de las víctimas son pymes con menos de 50 empleados. El costo promedio de recuperación supera los $50 millones de pesos — sin contar la pérdida de clientes y reputación.</p>
+    </div>
+
+    <h2 id="que-es">¿Qué es el ransomware y por qué deberías preocuparte?</h2>
+    <p>El ransomware es un tipo de software malicioso que entra a tu computador o red, <strong>cifra todos tus archivos</strong> haciéndolos inaccesibles, y luego exige un pago — generalmente en criptomonedas — para devolverte el acceso. No importa si tienes una ferretería, un consultorio médico, una empresa de logística o una tienda de ropa: si usas computadores y tienes datos que importan, eres un blanco potencial.</p>
+    <p>Lo que hace especialmente peligroso al ransomware es su velocidad. En cuestión de minutos puede cifrar miles de archivos en todos los equipos conectados a la misma red. Para cuando te das cuenta de lo que pasó, ya es demasiado tarde para detenerlo sin haber tomado precauciones antes.</p>
+
+    <div class="stats-row">
+      <div class="stat-box red">
+        <div class="stat-num">+60%</div>
+        <div class="stat-desc">Aumento de ataques a pymes en Colombia en el último año</div>
+      </div>
+      <div class="stat-box red">
+        <div class="stat-num">$50M+</div>
+        <div class="stat-desc">Costo promedio de recuperación por ataque en pymes</div>
+      </div>
+      <div class="stat-box navy">
+        <div class="stat-num">72h</div>
+        <div class="stat-desc">Tiempo promedio para detectar un ataque una vez ocurrido</div>
+      </div>
+      <div class="stat-box navy">
+        <div class="stat-num">95%</div>
+        <div class="stat-desc">De los ataques exitosos aprovechan errores humanos evitables</div>
+      </div>
+    </div>
+
+    <h2 id="como-entra">¿Cómo entra el ransomware a tu empresa?</h2>
+    <p>Entender las vías de entrada es el primer paso para bloquearlo. Estas son las más comunes en Colombia:</p>
+
+    <div class="entrada-grid">
+      <div class="entrada-card">
+        <div class="entrada-emoji">📧</div>
+        <div class="entrada-pct">68%</div>
+        <div class="entrada-title">Correo electrónico (Phishing)</div>
+        <p class="entrada-desc">Un empleado abre un adjunto o hace clic en un enlace falso. Es la vía más común y la más evitable.</p>
+      </div>
+      <div class="entrada-card">
+        <div class="entrada-emoji">🌐</div>
+        <div class="entrada-pct">14%</div>
+        <div class="entrada-title">Sitios web infectados</div>
+        <p class="entrada-desc">Descargar software pirata, visitar páginas inseguras o instalar extensiones maliciosas.</p>
+      </div>
+      <div class="entrada-card">
+        <div class="entrada-emoji">🔑</div>
+        <div class="entrada-pct">11%</div>
+        <div class="entrada-title">Contraseñas débiles o robadas</div>
+        <p class="entrada-desc">Acceso remoto con credenciales filtradas o contraseñas predecibles como "123456" o el nombre de la empresa.</p>
+      </div>
+      <div class="entrada-card">
+        <div class="entrada-emoji">💾</div>
+        <div class="entrada-pct">7%</div>
+        <div class="entrada-title">USB y dispositivos externos</div>
+        <p class="entrada-desc">Conectar un USB desconocido o encontrado puede infectar toda la red instantáneamente.</p>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-icon">🎯</span>
+      <p><strong>El dato más importante:</strong> el 95% de los ataques exitosos aprovechan errores humanos. Eso significa que la mayoría son evitables con capacitación y medidas básicas — sin necesidad de sistemas costosos.</p>
+    </div>
+
+    <h2 id="escenario-real">Cómo se ve un ataque real en una pyme colombiana</h2>
+
+    <div class="escenario">
+      <div class="esc-inner">
+        <div class="esc-label">📍 Escenario real — empresa distribuidora, Bogotá</div>
+        <div class="esc-title">Un lunes a las 8:30 a.m.</div>
+        <p class="esc-p">Una empleada del área contable abre un correo que parece ser de la DIAN con el asunto "Notificación de embargo tributario". Asustada, hace clic en el adjunto para ver el documento. En ese momento descarga e instala el ransomware sin saberlo.</p>
+        <p class="esc-p">A las 8:47 a.m. — apenas 17 minutos después — todos los archivos de facturación, base de clientes, contratos y registros contables de los últimos 5 años están cifrados. En pantalla aparece un mensaje: <span class="esc-highlight">"Sus archivos han sido encriptados. Pague $15.000 USD en Bitcoin en las próximas 48 horas para recuperarlos."</span></p>
+        <p class="esc-p">La empresa no tenía backup reciente. Tardó 3 semanas en recuperarse parcialmente, perdió clientes, y el costo total entre rescate, recuperación y tiempo perdido superó los <span class="esc-highlight">$80 millones de pesos.</span> Todo por un clic.</p>
+      </div>
+    </div>
+
+    <h2 id="medidas">Las medidas concretas para protegerte — ordenadas por costo</h2>
+    <p>Aquí está la realidad: no necesitas gastar millones para estar bien protegido. La mayoría de las medidas más efectivas son gratuitas o muy económicas. Lo que sí requieren es hacerlas.</p>
+
+    <div class="medida-list">
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num gratis">1</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Regla del backup 3-2-1 <span class="costo-tag costo-gratis">✓ Gratis o casi gratis</span></div>
+          <p class="medida-desc">Es la medida más importante de todas. Mantén 3 copias de tus datos: 2 en medios diferentes (disco externo + nube) y 1 fuera de la oficina. Si el ransomware cifra tus archivos, restauras desde el backup y listo — sin pagar rescate. Un backup desconectado de la red no puede ser cifrado.</p>
+          <span class="medida-como">💡 Cómo hacerlo: Google Drive o OneDrive para la nube (desde $0), un disco externo de $150.000–$200.000 para la copia local.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num gratis">2</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Mantener Windows y programas actualizados <span class="costo-tag costo-gratis">✓ Gratis</span></div>
+          <p class="medida-desc">El 80% de los ransomwares aprovechan vulnerabilidades ya conocidas y ya corregidas en actualizaciones que simplemente no se han instalado. Activar las actualizaciones automáticas en todos los equipos es una de las defensas más simples y efectivas que existen.</p>
+          <span class="medida-como">💡 Cómo hacerlo: Configuración → Windows Update → Activar actualizaciones automáticas.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num gratis">3</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Capacitar al equipo en phishing <span class="costo-tag costo-gratis">✓ Gratis</span></div>
+          <p class="medida-desc">Como vimos, el 68% de los ataques entran por correo. Una hora de capacitación con el equipo — mostrando ejemplos reales de correos de phishing y enseñando a identificarlos — puede prevenir la mayoría de los ataques. Esta es la inversión con mayor retorno posible: cero pesos, máximo impacto.</p>
+          <span class="medida-como">💡 Señales de phishing: remitente sospechoso, urgencia exagerada, adjuntos no esperados, links que no coinciden con el dominio oficial.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num gratis">4</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Contraseñas fuertes y únicas + autenticación en dos pasos <span class="costo-tag costo-gratis">✓ Gratis</span></div>
+          <p class="medida-desc">Una contraseña robada es la llave maestra de tu empresa. Cada cuenta debe tener una contraseña única y difícil. Y el correo corporativo — que es la puerta de entrada más atacada — debe tener autenticación en dos factores (2FA) activada obligatoriamente. Con Google Workspace o Microsoft 365 esto se activa en segundos.</p>
+          <span class="medida-como">💡 Usa un gestor de contraseñas gratuito como Bitwarden para que el equipo no use la misma contraseña en todo.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num bajo">5</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Antivirus con protección en tiempo real <span class="costo-tag costo-bajo">💲 Bajo costo</span></div>
+          <p class="medida-desc">Windows Defender (incluido en Windows 10/11) es una opción sólida y gratuita. Para mayor protección, antivirus como Malwarebytes o Bitdefender ofrecen planes empresariales desde $80.000 por equipo al año. Lo importante es que esté activo, actualizado y en todos los equipos — no solo en algunos.</p>
+          <span class="medida-como">💡 En Axentrix podemos ayudarte a configurar y centralizar la gestión de antivirus en todos los equipos de tu empresa.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num bajo">6</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Separar la red de empleados de la red de invitados <span class="costo-tag costo-bajo">💲 Bajo costo</span></div>
+          <p class="medida-desc">Si un cliente o visitante conecta su dispositivo infectado a tu Wi-Fi y está en la misma red que los computadores de la empresa, el ransomware puede propagarse. Crear una red separada para invitados — algo que cualquier router moderno permite — aísla ese riesgo completamente.</p>
+          <span class="medida-como">💡 En la mayoría de los routers se hace desde el panel de administración en menos de 10 minutos.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num medio">7</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Migrar a correo corporativo con filtros avanzados <span class="costo-tag costo-medio">💲💲 Inversión media</span></div>
+          <p class="medida-desc">Usar Gmail o Hotmail personal para el trabajo es un riesgo real. Microsoft 365 y Google Workspace incluyen filtros avanzados de phishing que bloquean automáticamente la mayoría de los correos maliciosos antes de que lleguen al buzón. Esta sola medida elimina la vía de entrada más común.</p>
+          <span class="medida-como">💡 En Axentrix hacemos la migración completa a Microsoft 365 o Google Workspace con configuración de seguridad incluida.</span>
+        </div>
+      </div>
+
+      <div class="medida-card">
+        <div class="medida-icon-wrap"><div class="medida-num medio">8</div></div>
+        <div class="medida-info">
+          <div class="medida-title">Plan de respuesta a incidentes <span class="costo-tag costo-bajo">💲 Bajo costo</span></div>
+          <p class="medida-desc">¿Qué haría tu empresa si mañana amanece con todos los archivos cifrados? Si la respuesta es "no sabemos", ese es el problema. Tener un plan documentado — quién llama a quién, cómo se aísla la red, dónde están los backups — reduce el caos y el daño cuando ocurre un incidente.</p>
+          <span class="medida-como">💡 En Axentrix podemos ayudarte a diseñar un plan de respuesta básico adaptado al tamaño y tipo de tu empresa.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA INTERMEDIO -->
+    <div class="cta-inline">
+      <div class="cta-inline-inner">
+        <h3>¿Tu empresa está protegida? Hagamos el diagnóstico</h3>
+        <p>En Axentrix evaluamos el estado actual de seguridad de tu empresa y te decimos exactamente qué medidas necesitas implementar según tu tamaño y presupuesto.</p>
+        <div class="cta-btns">
+          <a href="https://wa.me/573239646992?text=Hola%20Axentrix,%20quer%C3%ADa%20consultar%20sobre%20c%C3%B3mo%20proteger%20mi%20empresa%20del%20ransomware." target="_blank" rel="noopener" class="cta-btn-primary">💬 Consultar por WhatsApp</a>
+          <a href="mailto:comercial@axentrix.co" class="cta-btn-secondary">✉️ Enviar correo</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="plan-esta-semana">Lo que puedes hacer esta semana — sin gastar nada</h2>
+    <p>Si solo puedes hacer una cosa, que sea el backup. Si puedes hacer más, aquí está el plan de acción por días:</p>
+
+    <div class="plan-steps">
+      <div class="plan-step">
+        <div class="plan-step-num">L</div>
+        <div class="plan-step-info">
+          <h4>Lunes — Activa las actualizaciones automáticas</h4>
+          <p>En todos los computadores de la empresa. Windows Update + actualizaciones automáticas del navegador y los programas más usados.</p>
+          <span class="tiempo">⏱ 15 minutos por equipo</span>
+        </div>
+      </div>
+      <div class="plan-step">
+        <div class="plan-step-num">M</div>
+        <div class="plan-step-info">
+          <h4>Martes — Configura tu primer backup en la nube</h4>
+          <p>Activa Google Drive o OneDrive en los equipos críticos. Elige las carpetas más importantes: facturación, clientes, contratos.</p>
+          <span class="tiempo">⏱ 30 minutos</span>
+        </div>
+      </div>
+      <div class="plan-step">
+        <div class="plan-step-num">M</div>
+        <div class="plan-step-info">
+          <h4>Miércoles — Capacita al equipo en phishing</h4>
+          <p>Reúne al equipo 30 minutos. Muestra ejemplos reales de correos de phishing. Define la regla: ante la duda, no hacer clic — preguntar primero.</p>
+          <span class="tiempo">⏱ 30 minutos</span>
+        </div>
+      </div>
+      <div class="plan-step">
+        <div class="plan-step-num">J</div>
+        <div class="plan-step-info">
+          <h4>Jueves — Activa el doble factor en el correo</h4>
+          <p>En Gmail: Seguridad → Verificación en dos pasos. En Outlook: Seguridad → Autenticación en dos factores. Hazlo en todas las cuentas corporativas.</p>
+          <span class="tiempo">⏱ 10 minutos por cuenta</span>
+        </div>
+      </div>
+      <div class="plan-step">
+        <div class="plan-step-num">V</div>
+        <div class="plan-step-info">
+          <h4>Viernes — Verifica que el antivirus esté activo y actualizado</h4>
+          <p>Revisa que Windows Defender (o el antivirus que usen) esté activo en todos los equipos y con definiciones actualizadas.</p>
+          <span class="tiempo">⏱ 5 minutos por equipo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="success-box">
+      <span class="tip-icon">🎯</span>
+      <p><strong>Con estas 5 acciones gratuitas</strong> habrás eliminado el 80% de los vectores de ataque más comunes. No es perfección — es protección real con cero inversión de dinero.</p>
+    </div>
+
+    <h2 id="si-ya-te-atacaron">¿Y si ya te atacaron? Qué hacer en los primeros minutos</h2>
+    <p>Si llegas a la oficina y ves el mensaje de ransomware en pantalla, cada segundo cuenta:</p>
+
+    <ol>
+      <li><strong>Desconecta inmediatamente todos los equipos de la red</strong> — desenchufa el cable de red o apaga el Wi-Fi en el router. El ransomware se propaga por la red; aislarlo limita el daño.</li>
+      <li><strong>No apagues los equipos infectados</strong> — paradójicamente, apagarlos puede dificultar la recuperación. Déjalos encendidos pero desconectados.</li>
+      <li><strong>No pagues el rescate</strong> — pagar no garantiza que recuperes los archivos, financia a los criminales y te pone en una lista de "víctimas que pagan" para futuros ataques.</li>
+      <li><strong>Llama a un experto en ciberseguridad</strong> — antes de hacer nada más. La recuperación improvisada puede destruir evidencia y empeorar la situación.</li>
+      <li><strong>Reporta el incidente</strong> — al Centro Cibernético Policial de Colombia (CCP) o al CSIRT de la Policía Nacional. Además de ser lo correcto, puede ayudarte legalmente.</li>
+    </ol>
+
+    <div class="highlight-box">
+      <p>🛡️ Si tienes un backup reciente y desconectado de la red, el ransomware pierde su poder. Restauras desde el backup, formateas los equipos afectados y sigues operando. Por eso el backup no es opcional — es tu red de seguridad más importante.</p>
+    </div>
+
+    <h2 id="conclusion">Conclusión: la ciberseguridad no es un lujo, es un seguro de negocio</h2>
+    <p>Nadie instala un sistema de alarma después de que le roban — lo instala antes. La ciberseguridad funciona igual. El costo de implementar las medidas básicas es una fracción mínima del costo de recuperarse de un ataque.</p>
+    <p>No necesitas un departamento de TI ni un presupuesto enorme. Necesitas implementar las medidas correctas en el orden correcto. En Axentrix te ayudamos a hacerlo de forma práctica, adaptada al tamaño de tu empresa y sin tecnicismos innecesarios.</p>
+    <p><strong>Tu empresa trabajó demasiado para perderlo todo en 17 minutos. Protégela hoy.</strong></p>
+
+    <div class="cta-inline">
+      <div class="cta-inline-inner">
+        <h3>Protege tu empresa antes de que sea tarde</h3>
+        <p>Evaluamos el estado de seguridad de tu empresa sin costo y te decimos exactamente qué necesitas implementar. Sin tecnicismos, con soluciones reales para tu presupuesto.</p>
+        <div class="cta-btns">
+          <a href="https://wa.me/573239646992?text=Hola%20Axentrix,%20quiero%20proteger%20mi%20empresa%20del%20ransomware%20y%20necesito%20asesor%C3%ADa." target="_blank" rel="noopener" class="cta-btn-primary">🛡️ Evaluar mi empresa gratis</a>
+          <a href="index.html#servicios" class="cta-btn-secondary">Ver servicio de ciberseguridad</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="share-bar">
+      <span>Comparte — puede ayudar a alguien:</span>
+      <button class="share-btn" onclick="shareWA()">📱 WhatsApp</button>
+      <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+      <button class="share-btn" id="copyBtn" onclick="copyLink()">🔗 Copiar link</button>
+    </div>
+
+    <div class="related">
+      <h2>Artículos relacionados</h2>
+      <div class="related-grid">
+        <a href="post-biometria-empresas.html" class="related-card">
+          <span class="related-emoji">👆</span>
+          <span class="related-title">Cómo la biometría puede ahorrarle horas de trabajo a tu empresa</span>
+          <span class="related-date">22 de abril, 2026</span>
+        </a>
+        <a href="post-senales-mantenimiento.html" class="related-card">
+          <span class="related-emoji">🔧</span>
+          <span class="related-title">5 señales de que tu computador necesita mantenimiento urgente</span>
+          <span class="related-date">10 de abril, 2026</span>
+        </a>
+        <a href="post-laptop-vs-escritorio.html" class="related-card">
+          <span class="related-emoji">💻</span>
+          <span class="related-title">¿Laptop o escritorio? Guía definitiva para elegir según tu uso</span>
+          <span class="related-date">22 de abril, 2026</span>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="post-sidebar">
+    <div class="sidebar-card reveal">
+      <h3>📋 En este artículo</h3>
+      <ul class="toc-list">
+        <li><a href="#que-es">¿Qué es el ransomware?</a></li>
+        <li><a href="#como-entra">¿Cómo entra?</a></li>
+        <li><a href="#escenario-real">Caso real en Colombia</a></li>
+        <li><a href="#medidas">Medidas de protección</a></li>
+        <li><a href="#plan-esta-semana">Plan esta semana</a></li>
+        <li><a href="#si-ya-te-atacaron">Si ya te atacaron</a></li>
+        <li><a href="#conclusion">Conclusión</a></li>
+      </ul>
+    </div>
+
+    <!-- Alerta sidebar -->
+    <div style="background:linear-gradient(135deg,#7f1d1d,#991b1b);border-radius:var(--r-lg);padding:1.75rem;text-align:center;border:1px solid rgba(220,38,38,.3);" class="reveal">
+      <div style="font-size:2rem;margin-bottom:.75rem;">🛡️</div>
+      <h3 style="font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.5rem;">¿Tu empresa está protegida?</h3>
+      <p style="font-size:.78rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1.25rem;">Evaluación de seguridad gratuita. Te decimos exactamente dónde están tus vulnerabilidades.</p>
+      <a href="https://wa.me/573239646992?text=Hola%20Axentrix,%20quiero%20una%20evaluaci%C3%B3n%20de%20seguridad%20para%20mi%20empresa." target="_blank" rel="noopener" style="display:block;padding:.7rem;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border-radius:var(--r);font-size:.82rem;font-weight:700;text-decoration:none;margin-bottom:.6rem;transition:all .2s;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='none'">💬 Evaluación gratuita</a>
+      <a href="index.html#servicios" style="display:block;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:var(--r);font-size:.78rem;font-weight:600;text-decoration:none;transition:all .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.5)';this.style.color='white'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.7)'">Ver servicio de ciberseguridad</a>
+    </div>
+
+    <a href="blog.html" class="reveal" style="display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem;background:var(--light);border:1px solid var(--border);border-radius:var(--r);font-size:.82rem;font-weight:700;color:var(--navy);text-decoration:none;transition:all .2s;" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">← Volver al blog</a>
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo-wrap">
+          <img src="LOGO_AXENTRIX-SIN FONDO.png" alt="Logo Axentrix" width="34" height="34" style="object-fit:contain;border-radius:6px;">
+          <div><div class="logo-text">AXENTRIX</div><div class="logo-sub">Infraestructura y Soluciones Tecnológicas</div></div>
+        </a>
+        <p>Tu aliado tecnológico de confianza. Equipos, soluciones y soporte para personas y empresas.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="index.html#productos">Computadores</a></li>
+          <li><a href="index.html#productos">Arma tu Equipo</a></li>
+          <li><a href="index.html#productos">Celulares</a></li>
+          <li><a href="index.html#productos">Tablets</a></li>
+          <li><a href="index.html#productos">Impresoras</a></li>
+          <li><a href="index.html#productos">Partes y Repuestos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="index.html#servicios">Mantenimiento</a></li>
+          <li><a href="index.html#servicios">Biometría</a></li>
+          <li><a href="index.html#servicios">Office 365 / G.Workspace</a></li>
+          <li><a href="index.html#servicios">Infraestructura IT</a></li>
+          <li><a href="index.html#servicios">Ciberseguridad</a></li>
+          <li><a href="index.html#servicios">CCTV</a></li>
+          <li><a href="index.html#servicios">Asesorías</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="index.html#por-que">¿Por qué Axentrix?</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="https://wa.me/573239646992" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/company/axentrix.co" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/axentrix.co" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/axentrix.co" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Axentrix — Infraestructura y Soluciones Tecnológicas. Todos los derechos reservados.</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
+        <a href="politica-de-privacidad.html">Privacidad</a><a href="#">Términos</a><a href="https://axentrix.co">www.axentrix.co</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const prog=document.getElementById('progress');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  prog.style.width=(window.scrollY/(h.scrollHeight-h.clientHeight)*100)+'%';
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+  document.querySelectorAll('h2[id]').forEach(s=>{
+    if(s.getBoundingClientRect().top<130){
+      document.querySelectorAll('.toc-list a').forEach(a=>a.classList.remove('active-toc'));
+      const l=document.querySelector(`.toc-list a[href="#${s.id}"]`);
+      if(l)l.classList.add('active-toc');
+    }
+  });
+});
+function revealAll(){document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('visible');});}
+window.addEventListener('scroll',revealAll);setTimeout(revealAll,120);
+function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');document.getElementById('ham').classList.toggle('open');}
+function closeMenu(){document.getElementById('mobMenu').classList.remove('open');document.getElementById('ham').classList.remove('open');}
+document.addEventListener('click',e=>{const m=document.getElementById('mobMenu'),h=document.getElementById('ham');if(m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target))closeMenu();});
+document.querySelectorAll('.dropdown a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('.dropdown').forEach(d=>{d.style.opacity='0';d.style.visibility='hidden';});});});
+function shareWA(){window.open('https://wa.me/?text='+encodeURIComponent('Ransomware en Colombia: cómo proteger tu negocio — '+location.href),'_blank');}
+function shareLinkedIn(){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank');}
+function copyLink(){navigator.clipboard.writeText(location.href).then(()=>{const b=document.getElementById('copyBtn');b.textContent='✅ Copiado';setTimeout(()=>b.textContent='🔗 Copiar link',2000);});}
+</script>
+</body>
+</html>
