@@ -1012,15 +1012,7 @@ const pbg = document.getElementById('parallax-bg');
 window.addEventListener('scroll', () => {
   pbg.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
 }, {passive:true});
-  
-</script>
-
-  <script src="https://scripts.qubitsuite.com/v1.js"></script>
-<script>
-  window.QubitChat.init({
-    channelId: "9b258fa6"
-  });
-  // Cerrar dropdown al hacer clic en un link dentro de él
+   // Cerrar dropdown al hacer clic en un link dentro de él
 document.querySelectorAll('.dropdown a').forEach(a => {
   a.addEventListener('click', () => {
     document.querySelectorAll('.dropdown').forEach(d => {
@@ -1030,6 +1022,13 @@ document.querySelectorAll('.dropdown a').forEach(a => {
   });
 });
 </script>
+
+  <script src="https://scripts.qubitsuite.com/v1.js"></script>
+<script>
+  window.QubitChat.init({
+    channelId: "9b258fa6"
+  });
+ </script>
   
 </body>
 </html>
